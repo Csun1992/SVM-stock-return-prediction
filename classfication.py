@@ -19,7 +19,7 @@ result3 = appleData[labels==2, -1]
 group4 = appleData[labels==3, :-1]
 result4 = appleData[labels==3, -1]
 
-
+"""
 trainRatio = 0.8
 
 XTrain1, XTest1, yTrain1, yTest1 = model_selection.train_test_split(group1, result1,
@@ -30,16 +30,36 @@ XTrain3, XTest3, yTrain3, yTest3 = model_selection.train_test_split(group3, resu
         train_size=trainRatio, random_state=11)
 XTrain4, XTest4, yTrain4, yTest4 = model_selection.train_test_split(group4, result4,
         train_size=trainRatio, random_state=11)
+"""
+fold = 5 
+clf = [svm.SVC() for i in range(4)]
+scores1 = model_selection.cross_val_score(clf[0], group1, result1, cv=fold)
+scores2 = model_selection.cross_val_score(clf[1], group2, result2, cv=fold)
+scores3 = model_selection.cross_val_score(clf[2], group3, result3, cv=fold)
+scores4 = model_selection.cross_val_score(clf[3], group4, result4, cv=fold)
 
-print np.size(yTrain1)
-print np.size(yTrain2)
-print np.size(yTrain3)
-print np.size(yTrain4)
-clf = [svm.SVC(C=0.7) for i in range(4)]
+print scores1.mean()
+print scores1.std()
+print '\n' 
+print scores2.mean()
+print scores2.std()
+print '\n' 
+
+print scores3.mean()
+print scores3.std()
+print '\n' 
+print scores4.mean()
+print scores4.std()
+
+
+
+"""    
 clf[0].fit(XTrain1, yTrain1)
 clf[1].fit(XTrain2, yTrain2)
 clf[2].fit(XTrain3, yTrain3)
 clf[3].fit(XTrain4, yTrain4)
+
+
 
 predict1 = clf[0].predict(XTest1)
 predict2 = clf[1].predict(XTest2)
@@ -65,3 +85,4 @@ print sum([i!=j for i,j in zip(trainPred1, yTrain1)])/float(np.size(yTrain1))
 print sum([i!=j for i,j in zip(trainPred2, yTrain2)])/float(np.size(yTrain2))
 print sum([i!=j for i,j in zip(trainPred3, yTrain3)])/float(np.size(yTrain3))
 print sum([i!=j for i,j in zip(trainPred4, yTrain4)])/float(np.size(yTrain4))
+"""
