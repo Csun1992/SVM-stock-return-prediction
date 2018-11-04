@@ -10,6 +10,10 @@ kmeans = cluster.KMeans(n_clusters=4, random_state=11).fit(cleanData)
 labels = np.array(kmeans.labels_)
 
 appleData = np.loadtxt('data/appleTrainData.txt') 
+aggApple = appleData[:, :-1]
+aggResult = appleData[:, -1]
+
+
 group1 = appleData[labels==0, :-1]
 result1 = appleData[labels==0, -1]
 group2 = appleData[labels==1, :-1]
@@ -32,11 +36,16 @@ XTrain4, XTest4, yTrain4, yTest4 = model_selection.train_test_split(group4, resu
         train_size=trainRatio, random_state=11)
 """
 fold = 5 
+aggClf = svm.SVC()
 clf = [svm.SVC() for i in range(4)]
+aggScore = model_selection.cross_val_score(aggClf, aggApple, aggResult, cv=fold)
 scores1 = model_selection.cross_val_score(clf[0], group1, result1, cv=fold)
 scores2 = model_selection.cross_val_score(clf[1], group2, result2, cv=fold)
 scores3 = model_selection.cross_val_score(clf[2], group3, result3, cv=fold)
 scores4 = model_selection.cross_val_score(clf[3], group4, result4, cv=fold)
+print aggScore.mean()    
+print aggScore.std()
+print '\n'
 
 print scores1.mean()
 print scores1.std()
@@ -50,6 +59,13 @@ print scores3.std()
 print '\n' 
 print scores4.mean()
 print scores4.std()
+
+
+print '\n'    
+print np.size(result1)
+print np.size(result2)
+print np.size(result3)
+print np.size(result4)
 
 
 
