@@ -16,15 +16,14 @@ djia = []
 with open("djia", 'r') as f:
     for line in f:
         djia.append(float(line.rstrip()))
-del djia[-1]
+djia = [(i-j)/j for i,j in zip(djia, djia[1:])]
 
 sp = []
 with open('sp', 'r') as f:
     for line in f:
         item = line.rstrip().split(',')
         sp.append(float(item[-2]))
-del sp[-1]
-del sp[-1]
+sp = [(i-j)/j for i,j in zip(sp, sp[1:])]
 
 clusterData = np.array([unemployment, inflation, djia, sp]).T
-np.savetxt('clusterData.txt', clusterData)
+np.savetxt('data/clusterData.txt', clusterData)
