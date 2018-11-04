@@ -43,6 +43,6 @@ applePrice, appleSize = getStockPrice("data/apple")
 appleThreeMonthMA = [(i+j+k)/3 for i,j,k in zip(applePrice, applePrice[1:], applePrice[2:])]
 appleTwoMonthMA = [(i+j)/2 for i,j in zip(applePrice[1:], applePrice[2:])]
 appleReturn = [(j-i)/i for i,j in zip(applePrice[1:], applePrice[2:])]
-
-appleData = np.array([appleReturn, appleTwoMonthMA, appleThreeMonthMA, appleSize]).T
+classification = map(int, [i>0 for i in appleReturn])
+appleData = np.array([applePrice[2:], appleTwoMonthMA, appleThreeMonthMA, appleSize, classification]).T
 np.savetxt('data/appleTrainData.txt', appleData)
