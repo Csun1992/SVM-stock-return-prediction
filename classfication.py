@@ -33,15 +33,26 @@ class stockPrediction:
                     cv=self.fold))
         return self.scores 
     
+    def findBaseRate(self):
+        self.baseRate = []
+        for i in range(self.clusterNum):
+            br = sum(self.label[i])/np.size(self.label[i], 0)
+            br = max(br, 1-br)
+            self.baseRate.append(br)
+        return self.baseRate
+    
     def run(self):
         self.clusterStockPrice()
         self.svmFitting()
+        self.findBaseRate()
         return self.scores
 
     def reportResult(self):
         for i in range(self.clusterNum):
             print "group NO." + str(i+1) + " correct rate"
             print self.scores[i].mean()
+            print "Base Rate:"
+            print self.baseRate[i]
             print "\n"
         return self.scores
     
