@@ -1,12 +1,19 @@
 import numpy as np
+import sys
 def getStockPrice(fileName):
     price = []
     size = []
     with open(fileName) as f:
-        for line in f:
-            item = line.rstrip().split(',')
-            price.append(float(item[-2]))
-            size.append(float(item[-1]))
+        if fileName == 'data/apple':
+            for line in f:
+                item = line.rstrip().split(',')
+                price.append(float(item[-2]))
+                size.append(float(item[-1]))
+        else:
+            for line in f:
+                item = line.rstrip().split('\t')
+                price.append(float(item[-2]))
+                size.append(float(item[-1]))
     return price, size[2:-1]
 
 def getInputData(fileName):        
@@ -20,7 +27,7 @@ def getInputData(fileName):
     classification = map(int, [i>0 for i in stockReturn])
     inputData = np.array([price[2:-1], twoMonthMA, threeMonthMA, size, classification]).T
     fileName = fileName + 'TrainData.txt'
-    np.savetxt('data/appleTrainData.txt', inputData)
+    np.savetxt(fileName, inputData)
     return inputData
 
 
@@ -55,3 +62,4 @@ if __name__ == '__main__':
     
     fileName = 'apple' 
     getInputData(fileName)
+    getInputData('att') 

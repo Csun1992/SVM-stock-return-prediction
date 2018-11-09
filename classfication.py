@@ -84,3 +84,17 @@ if __name__ == "__main__":
     # Case when 4 clusters
     apple = stockPrediction("data/appleTrainData.txt", clusterNum=4)
     apple.reportResult()
+
+
+    
+    # for the case when cluster = 3
+    att = stockPrediction("data/attTrainData.txt")
+    att.reportResult()
+        
+    # Case when 2 clusters
+    att = stockPrediction("data/attTrainData.txt", clusterNum=2)
+    att.reportResult()
+       
+    # Case when 4 clusters
+    att = stockPrediction("data/attTrainData.txt", clusterNum=4)
+    att.reportResult()
