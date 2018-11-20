@@ -64,9 +64,6 @@ class stockPrediction:
         print self.noClusteringBaseRate
         return self.scores
 
-    def predict(self, macro, idiosync):
-       pass 
-   
 
 
 
