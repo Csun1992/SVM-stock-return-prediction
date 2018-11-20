@@ -52,6 +52,14 @@ class stockPrediction:
             self.clf[i].fit(self.train[i], self.trainLabel[i])
         return self.clf
 
+    def test(self):
+        self.error = []
+        for i in range(self.clusterNum):
+            pred = self.clf[i].predict(self.test[i])
+            error = sum([i != j for (i,j) in zip(self.testLabel[i], pred)])
+            self.error.append(error)
+        return self.error
+
     def reportResult(self):
         for i in range(self.clusterNum):
             print "group NO." + str(i+1) + " correct rate"
