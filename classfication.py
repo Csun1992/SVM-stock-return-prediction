@@ -56,13 +56,7 @@ class stockPrediction:
         self.test()
         for i in range(self.clusterNum):
             print "group NO." + str(i+1) + " correct rate"
-            print self.scores[i].mean()
-            print "Base Rate:"
-            print self.baseRate[i]
-            print "\n"
-
-        print "And finally, if we do not have any clustering, the precision rate is:"
-        print self.noClusteringBaseRate
+            print self.error[i].mean()
         return self.scores
 
 
