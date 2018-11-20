@@ -1,5 +1,6 @@
 import numpy as np
 from sklearn import preprocessing, cluster, model_selection, svm
+from sys import exit
 
 class stockPrediction:
     def __init__(self, stockDataLoc, clusterNum=3, fold=10, clusterDataLoc="data/clusterData.txt"):
@@ -33,31 +34,34 @@ class stockPrediction:
             self.train.append(train)
             self.test.append(test)
             self.trainLabel.append(trainLabel)
-            self.testLabeltrain.append(train)
+            self.testLabel.append(testLabel)
         return (self.train, self.test, self.trainLabel, self.testLabel)
             
     def train(self):
+        self.clusterStockPrice()
+        self.trainTestSplit()
         self.clf = [svm.SVC() for i in range(self.clusterNum)]
         for i in range(self.clusterNum):
             self.clf[i].fit(self.train[i], self.trainLabel[i])
         return self.clf
 
     def test(self):
+        self.train()
         self.error = []
         for i in range(self.clusterNum):
-            pred = self.clf[i].predict(self.test[i])
+            pred = (self.clf[i].predict(self.test[i]) == 1)
             error = sum([i != j for (i,j) in zip(self.testLabel[i], pred)])
-            self.error.append(error)
+            self.error.append(error/len(pred))
+            print "test size is"
+            print len(pred)
         return self.error
 
     def reportResult(self):
-        self.clusterStockPrice()
-        self.train()
         self.test()
         for i in range(self.clusterNum):
-            print "group NO." + str(i+1) + " correct rate"
+            print "group NO." + str(i+1) + " error rate"
             print self.error[i].mean()
-        return self.scores
+        return self.error
 
 
 
