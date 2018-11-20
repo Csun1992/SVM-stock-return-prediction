@@ -10,9 +10,6 @@ class stockPrediction:
         self.clusterStockPrice()
         self.train()
         self.crossValidation()
-        self.findBaseRate()
-        num,totalLen  = sum(map(sum, self.label)),sum(map(len, self.label))
-        self.noClusteringBaseRate = max(float(num)/totalLen, 1-float(num)/totalLen) 
 
     def cluster(self):
         data = np.loadtxt(self.clusterDataLoc)
@@ -55,14 +52,6 @@ class stockPrediction:
             self.clf[i].fit(self.train[i], self.trainLabel[i])
         return self.clf
 
-    def findBaseRate(self):
-        self.baseRate = []
-        for i in range(self.clusterNum):
-            br = sum(self.label[i])/np.size(self.label[i], 0)
-            br = max(br, 1-br)
-            self.baseRate.append(br)
-        return self.baseRate
-    
     def reportResult(self):
         for i in range(self.clusterNum):
             print "group NO." + str(i+1) + " correct rate"
