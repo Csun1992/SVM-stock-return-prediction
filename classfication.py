@@ -7,9 +7,6 @@ class stockPrediction:
         self.clusterNum = clusterNum
         self.clusterDataLoc = clusterDataLoc
         self.fold = fold
-        self.clusterStockPrice()
-        self.train()
-        self.crossValidation()
 
     def cluster(self):
         data = np.loadtxt(self.clusterDataLoc)
@@ -39,13 +36,6 @@ class stockPrediction:
             self.testLabeltrain.append(train)
         return (self.train, self.test, self.trainLabel, self.testLabel)
             
-    def crossValidation(self):
-        self.scores = []
-        for i in range(self.clusterNum):
-            self.scores.append(model_selection.cross_val_score(self.clf[i], self.group[i], self.label[i],
-                    cv=self.fold))
-        return self.scores 
-    
     def train(self):
         self.clf = [svm.SVC() for i in range(self.clusterNum)]
         for i in range(self.clusterNum):
@@ -61,6 +51,9 @@ class stockPrediction:
         return self.error
 
     def reportResult(self):
+        self.clusterStockPrice()
+        self.train()
+        self.test()
         for i in range(self.clusterNum):
             print "group NO." + str(i+1) + " correct rate"
             print self.scores[i].mean()
