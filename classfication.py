@@ -41,7 +41,6 @@ class stockPrediction:
             self.trainLabel.append(trainLabel)
             self.testLabeltrain.append(train)
         return (self.train, self.test, self.trainLabel, self.testLabel)
-    
             
     def crossValidation(self):
         self.scores = []
