@@ -29,6 +29,19 @@ class stockPrediction:
             self.group.append(data[groupNum==i, :-1])
             self.label.append(data[groupNum==i, -1])
         return (self.group, self.label)
+
+    def trainTestSplit(self):
+        self.train, self.trainLabel = [], []
+        self.test, self.testLabel = [], []
+        for i in range(self.clusterNum):
+            train, test, trainLabel, testLabel = model_selection.train_test_split(self.group[i],
+                    self.label[i], test_size=0.2, random_state=11)
+            self.train.append(train)
+            self.test.append(test)
+            self.trainLabel.append(trainLabel)
+            self.testLabeltrain.append(train)
+        return (self.train, self.test, self.trainLabel, self.testLabel)
+    
             
     def crossValidation(self):
         self.scores = []
