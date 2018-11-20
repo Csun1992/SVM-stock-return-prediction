@@ -52,7 +52,7 @@ class stockPrediction:
     def train(self):
         self.clf = [svm.SVC() for i in range(self.clusterNum)]
         for i in range(self.clusterNum):
-            self.clf[i].fit(self.group[i], self.label[i])
+            self.clf[i].fit(self.train[i], self.trainLabel[i])
         return self.clf
 
     def findBaseRate(self):
