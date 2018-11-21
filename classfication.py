@@ -2,23 +2,24 @@ import numpy as np
 from sklearn import preprocessing, cluster, model_selection, svm
 from sys import exit
 
-class stockPrediction:
-    def __init__(self, stockDataLoc, clusterNum=3, clusterDataLoc="data/clusterData.txt"):
-        self.stockDataLoc = stockDataLoc
+# Object that is for svm with classification
+class StockPrediction(object):
+    def __init__(self, microDataLoc, clusterNum=3, macroDataLoc="data/clusterData.txt"):
+        self.microDataLoc = microDataLoc
+        self.macroDataLoc = macroDataLoc
         self.clusterNum = clusterNum
-        self.clusterDataLoc = clusterDataLoc
 
     def cluster(self):
-        data = np.loadtxt(self.clusterDataLoc)
+        data = np.loadtxt(self.macroDataLoc)
         cleanData = preprocessing.scale(data)
         self.kmeans = cluster.KMeans(n_clusters=self.clusterNum, random_state=11).fit(cleanData)
         groupNum = np.array(self.kmeans.labels_)
         return groupNum
 
-    def clusterStockPrice(self):
+    def prepareData(self):
         self.group, self.label = [], []
         groupNum = self.cluster()
-        data = np.loadtxt(self.stockDataLoc)
+        data = np.loadtxt(self.microDataLoc)
         for i in range(self.clusterNum):
             self.group.append(data[groupNum==i, :-1])
             self.label.append(data[groupNum==i, -1])
@@ -37,7 +38,7 @@ class stockPrediction:
         return (self.train, self.test, self.trainLabel, self.testLabel)
             
     def train(self):
-        self.clusterStockPrice()
+        self.prepareData()
         self.trainTestSplit()
         self.clf = [svm.SVC() for i in range(self.clusterNum)]
         for i in range(self.clusterNum):
@@ -62,38 +63,64 @@ class stockPrediction:
         return self.error
 
 
+class StockPredNoClassification(StockPrediction):
+    def __init__(self, microDataLoc, macroDataLoc="data/clusterData.txt"):
+        StockPrediction.__init__(self, microDataLoc, clusterNum=1, macroDataLoc=macroDataLoc)
 
+    def prepareData(self):
+        self.group, self.label = [], []
+        microData = np.loadtxt(self.microDataLoc)
+        macroData = np.loadtxt(self.macroDataLoc)
+        data = np.concatenate((macroData, microData), axis=1)
+        for i in range(self.clusterNum):
+            self.group.append(data[: , :-1])
+            self.label.append(data[: , -1])
+        return (self.group, self.label)
 
+    def reportResult(self):
+        self.test()
+        print "Without Clustering, the correct classification rate is"
+        print 1-self.error[0]
+        print '\n'
+        return self.error
 
             
 if __name__ == "__main__":
 
+    # without clustering
+    apple = StockPredNoClassification("data/appleTrainData.txt")
+    apple.reportResult()
+
     # for the case when cluster = 3
-    apple = stockPrediction("data/appleTrainData.txt")
+    apple = StockPrediction("data/appleTrainData.txt")
     apple.reportResult()
         
     # Case when 2 clusters
-    apple = stockPrediction("data/appleTrainData.txt", clusterNum=2)
+    apple = StockPrediction("data/appleTrainData.txt", clusterNum=2)
     apple.reportResult()
        
     # Case when 4 clusters
-    apple = stockPrediction("data/appleTrainData.txt", clusterNum=4)
+    apple = StockPrediction("data/appleTrainData.txt", clusterNum=4)
     apple.reportResult()
 
     # Case when 1 cluster
-    apple = stockPrediction("data/appleTrainData.txt", clusterNum=1)
+    apple = StockPrediction("data/appleTrainData.txt", clusterNum=1)
     apple.reportResult()
 
 
     
+    # without clustering
+    att = StockPredNoClassification("data/attTrainData.txt")
+    att.reportResult()
+
     # for the case when cluster = 3
-    att = stockPrediction("data/attTrainData.txt")
+    att = StockPrediction("data/attTrainData.txt")
     att.reportResult()
         
     # Case when 2 clusters
-    att = stockPrediction("data/attTrainData.txt", clusterNum=2)
+    att = StockPrediction("data/attTrainData.txt", clusterNum=2)
     att.reportResult()
        
     # Case when 4 clusters
-    att = stockPrediction("data/attTrainData.txt", clusterNum=4)
+    att = StockPrediction("data/attTrainData.txt", clusterNum=4)
     att.reportResult()
