@@ -3,11 +3,10 @@ from sklearn import preprocessing, cluster, model_selection, svm
 from sys import exit
 
 class stockPrediction:
-    def __init__(self, stockDataLoc, clusterNum=3, fold=10, clusterDataLoc="data/clusterData.txt"):
+    def __init__(self, stockDataLoc, clusterNum=3, clusterDataLoc="data/clusterData.txt"):
         self.stockDataLoc = stockDataLoc
         self.clusterNum = clusterNum
         self.clusterDataLoc = clusterDataLoc
-        self.fold = fold
 
     def cluster(self):
         data = np.loadtxt(self.clusterDataLoc)
@@ -75,11 +74,11 @@ if __name__ == "__main__":
     apple.reportResult()
         
     # Case when 2 clusters
-    apple = stockPrediction("data/appleTrainData.txt", clusterNum=2)
+    apple = stockPrediction("data/appleTrainData.txt")
     apple.reportResult()
        
     # Case when 4 clusters
-    apple = stockPrediction("data/appleTrainData.txt", clusterNum=4)
+    apple = stockPrediction("data/appleTrainData.txt")
     apple.reportResult()
 
 
@@ -89,9 +88,9 @@ if __name__ == "__main__":
     att.reportResult()
         
     # Case when 2 clusters
-    att = stockPrediction("data/attTrainData.txt", clusterNum=2)
+    att = stockPrediction("data/attTrainData.txt")
     att.reportResult()
        
     # Case when 4 clusters
-    att = stockPrediction("data/attTrainData.txt", clusterNum=4)
+    att = stockPrediction("data/attTrainData.txt")
     att.reportResult()
