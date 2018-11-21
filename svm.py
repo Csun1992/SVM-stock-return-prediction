@@ -1,7 +1,7 @@
 import numpy as np
 from sklearn import preprocessing, cluster, model_selection, svm
 
-# Object that is for svm with classification
+# Object that for svm with clustering 
 class StockPrediction(object):
     def __init__(self, microDataLoc, clusterNum=1, macroDataLoc="data/clusterData.txt"):
         self.microDataLoc = microDataLoc
