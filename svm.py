@@ -1,6 +1,5 @@
 import numpy as np
 from sklearn import preprocessing, cluster, model_selection, svm
-from sys import exit
 
 # Object that is for svm with classification
 class StockPrediction(object):
