@@ -63,6 +63,9 @@ class StockPrediction(object):
         return self.error
 
 
+# StockPredNoClassification class is a class to classify the stock price direction 
+# without using clustering. The macro data used for clustering now was combined with
+# micro data for classification
 class StockPredNoClassification(StockPrediction):
     def __init__(self, microDataLoc):
         StockPrediction.__init__(self, microDataLoc)
