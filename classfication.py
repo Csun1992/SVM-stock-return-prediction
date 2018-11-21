@@ -4,7 +4,7 @@ from sys import exit
 
 # Object that is for svm with classification
 class StockPrediction(object):
-    def __init__(self, microDataLoc, clusterNum=3, macroDataLoc="data/clusterData.txt"):
+    def __init__(self, microDataLoc, clusterNum=1, macroDataLoc="data/clusterData.txt"):
         self.microDataLoc = microDataLoc
         self.macroDataLoc = macroDataLoc
         self.clusterNum = clusterNum
@@ -64,8 +64,8 @@ class StockPrediction(object):
 
 
 class StockPredNoClassification(StockPrediction):
-    def __init__(self, microDataLoc, macroDataLoc="data/clusterData.txt"):
-        StockPrediction.__init__(self, microDataLoc, clusterNum=1, macroDataLoc=macroDataLoc)
+    def __init__(self, microDataLoc):
+        StockPrediction.__init__(self, microDataLoc)
 
     def prepareData(self):
         self.group, self.label = [], []
@@ -92,7 +92,7 @@ if __name__ == "__main__":
     apple.reportResult()
 
     # for the case when cluster = 3
-    apple = StockPrediction("data/appleTrainData.txt")
+    apple = StockPrediction("data/appleTrainData.txt", clusterNum=3)
     apple.reportResult()
         
     # Case when 2 clusters
@@ -114,7 +114,7 @@ if __name__ == "__main__":
     att.reportResult()
 
     # for the case when cluster = 3
-    att = StockPrediction("data/attTrainData.txt")
+    att = StockPrediction("data/attTrainData.txt", clusterNum=3)
     att.reportResult()
         
     # Case when 2 clusters
@@ -123,4 +123,8 @@ if __name__ == "__main__":
        
     # Case when 4 clusters
     att = StockPrediction("data/attTrainData.txt", clusterNum=4)
+    att.reportResult()
+
+    # Case when 1 cluster
+    att = StockPrediction("data/attTrainData.txt", clusterNum=1)
     att.reportResult()
