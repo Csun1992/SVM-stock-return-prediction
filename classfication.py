@@ -29,7 +29,7 @@ class stockPrediction:
         self.test, self.testLabel = [], []
         for i in range(self.clusterNum):
             train, test, trainLabel, testLabel = model_selection.train_test_split(self.group[i],
-                    self.label[i], test_size=0.2, random_state=11)
+                    self.label[i], test_size=0.3, random_state=11)
             self.train.append(train)
             self.test.append(test)
             self.trainLabel.append(trainLabel)
@@ -50,16 +50,15 @@ class stockPrediction:
         for i in range(self.clusterNum):
             pred = (self.clf[i].predict(self.test[i]) == 1)
             error = sum([i != j for (i,j) in zip(self.testLabel[i], pred)])
-            self.error.append(error/len(pred))
-            print "test size is"
-            print len(pred)
+            self.error.append(float(error)/len(pred))
         return self.error
 
     def reportResult(self):
         self.test()
         for i in range(self.clusterNum):
-            print "group NO." + str(i+1) + " error rate"
-            print self.error[i].mean()
+            print "group NO." + str(i+1) + " correct rate"
+            print 1-self.error[i]
+        print '\n'
         return self.error
 
 
@@ -74,11 +73,15 @@ if __name__ == "__main__":
     apple.reportResult()
         
     # Case when 2 clusters
-    apple = stockPrediction("data/appleTrainData.txt")
+    apple = stockPrediction("data/appleTrainData.txt", clusterNum=2)
     apple.reportResult()
        
     # Case when 4 clusters
-    apple = stockPrediction("data/appleTrainData.txt")
+    apple = stockPrediction("data/appleTrainData.txt", clusterNum=4)
+    apple.reportResult()
+
+    # Case when 1 cluster
+    apple = stockPrediction("data/appleTrainData.txt", clusterNum=1)
     apple.reportResult()
 
 
@@ -88,9 +91,9 @@ if __name__ == "__main__":
     att.reportResult()
         
     # Case when 2 clusters
-    att = stockPrediction("data/attTrainData.txt")
+    att = stockPrediction("data/attTrainData.txt", clusterNum=2)
     att.reportResult()
        
     # Case when 4 clusters
-    att = stockPrediction("data/attTrainData.txt")
+    att = stockPrediction("data/attTrainData.txt", clusterNum=4)
     att.reportResult()
