@@ -12,55 +12,55 @@ class StockPrediction(object):
     def cluster(self):
         data = np.loadtxt(self.macroDataLoc)
         cleanData = preprocessing.scale(data)
-        self.kmeans = cluster.KMeans(n_clusters=self.clusterNum, random_state=11).fit(cleanData)
-        groupNum = np.array(self.kmeans.labels_)
+        kmeans = cluster.KMeans(n_clusters=self.clusterNum, random_state=11).fit(cleanData)
+        groupNum = np.array(kmeans.labels_)
         return groupNum
 
     def prepareData(self):
-        self.group, self.label = [], []
-        groupNum = self.cluster()
         data = np.loadtxt(self.microDataLoc)
+        groupNum = self.cluster()
+        group, label = [], []
         for i in range(self.clusterNum):
-            self.group.append(data[groupNum==i, :-1])
-            self.label.append(data[groupNum==i, -1])
-        return (self.group, self.label)
+            group.append(data[groupNum==i, :-1])
+            label.append(data[groupNum==i, -1])
+        return (group, label)
 
     def trainTestSplit(self):
-        self.train, self.trainLabel = [], []
-        self.test, self.testLabel = [], []
+        train, test, trainLabel, testLabel = [], [], [], []
+        group, label = self.prepareData()
         for i in range(self.clusterNum):
-            train, test, trainLabel, testLabel = model_selection.train_test_split(self.group[i],
-                    self.label[i], test_size=0.3, random_state=11)
-            self.train.append(train)
-            self.test.append(test)
-            self.trainLabel.append(trainLabel)
-            self.testLabel.append(testLabel)
-        return (self.train, self.test, self.trainLabel, self.testLabel)
+            trainData, testData, trainLabelData, testLabelData = model_selection.train_test_split(group[i],
+                    label[i], test_size=0.3, random_state=11)
+            train.append(trainData)
+            test.append(testData)
+            trainLabel.append(trainLabelData)
+            testLabel.append(testLabelData)
+        return (train, test, trainLabel, testLabel)
             
     def train(self):
-        self.prepareData()
-        self.trainTestSplit()
-        self.clf = [svm.SVC() for i in range(self.clusterNum)]
+        train, test, trainLabel, testLabel = self.trainTestSplit()
+        clf = [svm.SVC() for i in range(self.clusterNum)]
         for i in range(self.clusterNum):
-            self.clf[i].fit(self.train[i], self.trainLabel[i])
-        return self.clf
+            clf[i].fit(train[i], trainLabel[i])
+        return (clf, test, testLabel) # return test and testLabel to self.test() so no need to
+                                      # recompute the testing data again
 
     def test(self):
-        self.train()
-        self.error = []
+        clf, test, testLabel = self.train()
+        error = []
         for i in range(self.clusterNum):
-            pred = (self.clf[i].predict(self.test[i]) == 1)
-            error = sum([i != j for (i,j) in zip(self.testLabel[i], pred)])
-            self.error.append(float(error)/len(pred))
-        return self.error
+            pred = (clf[i].predict(test[i]) == 1)
+            caseError = sum([i != j for (i,j) in zip(testLabel[i], pred)])
+            error.append(float(caseError)/len(pred))
+        return error
 
     def reportResult(self):
-        self.test()
+        error = self.test()
         for i in range(self.clusterNum):
             print "group NO." + str(i+1) + " correct rate"
-            print 1-self.error[i]
+            print 1-error[i]
         print '\n'
-        return self.error
+        return error
 
 
 # StockPredNoClassification class is a class to classify the stock price direction 
@@ -71,21 +71,21 @@ class StockPredNoClassification(StockPrediction):
         StockPrediction.__init__(self, microDataLoc)
 
     def prepareData(self):
-        self.group, self.label = [], []
+        group, label = [], []
         microData = np.loadtxt(self.microDataLoc)
         macroData = np.loadtxt(self.macroDataLoc)
         data = np.concatenate((macroData, microData), axis=1)
         for i in range(self.clusterNum):
-            self.group.append(data[: , :-1])
-            self.label.append(data[: , -1])
-        return (self.group, self.label)
+            group.append(data[: , :-1])
+            label.append(data[: , -1])
+        return (group, label)
 
     def reportResult(self):
-        self.test()
+        error = self.test()
         print "Without Clustering, the correct classification rate is"
-        print 1-self.error[0]
+        print 1-error[0]
         print '\n'
-        return self.error
+        return error
 
             
 if __name__ == "__main__":
