@@ -20,3 +20,10 @@ The machine learning technique we chose here will take the macroeconomic environ
 The data we used are all monthly data from Jan. 01 1990 to Sep. 01 2018. We avoided the noisy daily or weekly data.  
 
 The stocks we used as examples include Apple,ATT.
+
+# Components of the Repository
+1. The folder named *data* which contains the data for clustering and svm classification. The raw clustering data are mainly from different government websites. The raw data for classification are from yahoo finance.
+2. The python file named *getData.py*. This file contains functions that transforms the raw data into format suitable for training. Since the raw data are taken from different sources, we wrote the ad hoc functions to transform the data. And then save the transformed data into *data* folder as well.
+3. The python file *svm.py*. This is the main file. It implements the algorithm. In this file, we created an *StockPrediction* object that can be constructed with the information about the location of the transformed clustering and classification data files. If want to find the final result about the testing error, we can simply call *reportResult()* method embedded in the object. It automatically runs the algorithm and reports tesing error. By default we set have "80-20" split for the training and tesing data.
+
+In addition, for comparison, we implemented a *StockPredNoClassification* object that inherits from the *StockPrediction*. In this derived class, we simply implement a svm with the clustering and classification data combined. Similar to the parent class, we can simply call the *reportResult()* method in this derived class to find out the testing errors.
