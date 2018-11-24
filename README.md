@@ -31,4 +31,5 @@ In addition, for comparison, we implemented a *StockPredNoClassification* object
 1. To compare the statistical difference of the performance between the svm with clustering and the svm without clustering, we are planning to perform certain hypothesis testing. 
 2. The data amount is still relatively small if we cluster them into three or four clusters. Thus we will perform experiment on the weekly data.
 3. Combine the two svm's into one with ensemble methods to see how big improvement we can have.
-4. Use the same dataset to implement RNN to compare the results.
+4. Use the same dataset to implement RNN to compare the results. Perform PCA on the data dimensions
+if overfitting occurs.
