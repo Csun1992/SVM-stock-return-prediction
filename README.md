@@ -1,6 +1,7 @@
-# SVM-stock-return-prediction
-We predict stock price with K-means clustering and support vector machine
+# Project Purpose
+We predict stock price moving direction with K-means clustering and support vector machine
 
+# Detailed Description of the Machine Learning Algorithm
 In this project, we predict the direction of stock price movement in the future months. So essentially, it is a classification problem.
 
 First, we cluster time periods into three clusters. The reason is because business cycles consist of 4 phases: 
@@ -18,4 +19,4 @@ The machine learning technique we chose here will take the macroeconomic environ
 
 The data we used are all monthly data from Jan. 01 1990 to Sep. 01 2018. We avoided the noisy daily or weekly data.  
 
-The stocks we used as examples include Apple,
+The stocks we used as examples include Apple,ATT.
