@@ -65,7 +65,7 @@ class StockPrediction(object):
 # StockPredNoClassification class is a class to classify the stock price direction 
 # without using clustering. The macro data used for clustering now was combined with
 # micro data for classification
-class StockPredNoClassification(StockPrediction):
+class StockPredNoClustering(StockPrediction):
     def __init__(self, microDataLoc):
         StockPrediction.__init__(self, microDataLoc)
 
@@ -90,7 +90,7 @@ class StockPredNoClassification(StockPrediction):
 if __name__ == "__main__":
 
     # without clustering
-    apple = StockPredNoClassification("data/appleTrainData.txt")
+    apple = StockPredNoClustering("data/appleTrainData.txt")
     apple.reportResult()
 
     # for the case when cluster = 3
@@ -112,7 +112,7 @@ if __name__ == "__main__":
 
     
     # without clustering
-    att = StockPredNoClassification("data/attTrainData.txt")
+    att = StockPredNoClustering("data/attTrainData.txt")
     att.reportResult()
 
     # for the case when cluster = 3
