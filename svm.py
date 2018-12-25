@@ -3,7 +3,7 @@ from sklearn import preprocessing, cluster, model_selection, svm
 from classifier import classifier
 
 # Object that for svm with clustering 
-class svm(classifier):
+class svmStockPred(classifier):
     def __init__(self, microDataLoc, clusterNum=1, macroDataLoc="data/clusterData.txt"):
         classifier.__init__(self, microDataLoc, clusterNum=1, macroDataLoc="data/clusterData.txt")
 
@@ -19,9 +19,9 @@ class svm(classifier):
 # StockPredNoClassification class is a class to classify the stock price direction 
 # without using clustering. The macro data used for clustering now was combined with
 # micro data for classification
-class svmNoCluster(svm):
+class svmNoCluster(svmStockPred):
     def __init__(self, microDataLoc):
-        svm.__init__(self, microDataLoc)
+        svmStockPred.__init__(self, microDataLoc)
 
     def prepareData(self):
         group, label = [], []
@@ -48,39 +48,39 @@ if __name__ == "__main__":
     apple.reportResult()
 
     # for the case when cluster = 3
-    apple = svm("data/appleTrainData.txt", clusterNum=3)
+    apple = svmStockPred("data/appleTrainData.txt", clusterNum=3)
     apple.reportResult()
         
     # Case when 2 clusters
-    apple = svm("data/appleTrainData.txt", clusterNum=2)
+    apple = svmStockPred("data/appleTrainData.txt", clusterNum=2)
     apple.reportResult()
        
     # Case when 4 clusters
-    apple = svm("data/appleTrainData.txt", clusterNum=4)
+    apple = svmStockPred("data/appleTrainData.txt", clusterNum=4)
     apple.reportResult()
 
     # Case when 1 cluster
-    apple = svm("data/appleTrainData.txt", clusterNum=1)
+    apple = svmStockPred("data/appleTrainData.txt", clusterNum=1)
     apple.reportResult()
 
 
     
     # without clustering
-    att = svm("data/attTrainData.txt")
+    att = svmStockPred("data/attTrainData.txt")
     att.reportResult()
 
     # for the case when cluster = 3
-    att = svm("data/attTrainData.txt", clusterNum=3)
+    att = svmStockPred("data/attTrainData.txt", clusterNum=3)
     att.reportResult()
         
     # Case when 2 clusters
-    att = svm("data/attTrainData.txt", clusterNum=2)
+    att = svmStockPred("data/attTrainData.txt", clusterNum=2)
     att.reportResult()
        
     # Case when 4 clusters
-    att = svm("data/attTrainData.txt", clusterNum=4)
+    att = svmStockPred("data/attTrainData.txt", clusterNum=4)
     att.reportResult()
 
     # Case when 1 cluster
-    att = svm("data/attTrainData.txt", clusterNum=1)
+    att = svmStockPred("data/attTrainData.txt", clusterNum=1)
     att.reportResult()
