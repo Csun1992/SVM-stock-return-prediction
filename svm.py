@@ -1,11 +1,11 @@
 import numpy as np
 from sklearn import preprocessing, cluster, model_selection, svm
-from classifier import classifier
+from classifier import Classifier
 
 # Object that for svm with clustering 
-class svmStockPred(classifier):
+class svmStockPred(Classifier):
     def __init__(self, microDataLoc, clusterNum=1, macroDataLoc="data/clusterData.txt"):
-        classifier.__init__(self, microDataLoc, clusterNum=1, macroDataLoc="data/clusterData.txt")
+        Classifier.__init__(self, microDataLoc, clusterNum=1, macroDataLoc="data/clusterData.txt")
 
     def train(self):
         train, test, trainLabel, testLabel = self.trainTestSplit()

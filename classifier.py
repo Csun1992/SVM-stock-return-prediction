@@ -4,7 +4,7 @@ from sklearn import preprocessing, cluster, model_selection, svm
 # This is a virtual class of classifier
 # Other classifiers will inherit from this class and rewrite the train() method
 
-class classifier(object):
+class Classifier(object):
     def __init__(self, microDataLoc, clusterNum=1, macroDataLoc="data/clusterData.txt"):
         self.microDataLoc = microDataLoc
         self.macroDataLoc = macroDataLoc
