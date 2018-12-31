@@ -43,16 +43,18 @@ class Classifier(object):
                     # must return a tuple of classifier instances, test data and test labels
 
     def test(self):
-        clf, test, testLabel = self.train()
+        clf, test, testLabel, cv = self.train()
         error = []
         for i in range(self.clusterNum):
             pred = (clf[i].predict(test[i]) == 1)
             caseError = sum([i != j for (i,j) in zip(testLabel[i], pred)])
             error.append(float(caseError)/len(pred))
-        return error
+        return (error, cv)
 
     def reportResult(self):
-        error = self.test()
+        error, cv = self.test()
+        print "the cross validation error is " 
+        print cv
         for i in range(self.clusterNum):
             print "group NO." + str(i+1) + " correct rate"
             print 1-error[i]

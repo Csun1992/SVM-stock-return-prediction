@@ -10,9 +10,13 @@ class svmStockPred(Classifier):
     def train(self):
         train, test, trainLabel, testLabel = self.trainTestSplit()
         clf = [svm.SVC() for i in range(self.clusterNum)]
+        cvScore = []
+        for i in range(self.clusterNum):
+            score = model_selection.cross_val_score(clf[i], train[i], trainLabel[i], cv = 10) 
+            cvScore.append(score.mean()) 
         for i in range(self.clusterNum):
             clf[i].fit(train[i], trainLabel[i])
-        return (clf, test, testLabel) # return test and testLabel to self.test() so no need to
+        return (clf, test, testLabel, cvScore) # return test and testLabel to self.test() so no need to
                                       # recompute the testing data again
 
 
@@ -34,7 +38,9 @@ class svmNoCluster(svmStockPred):
         return (group, label)
 
     def reportResult(self):
-        error = self.test()
+        error, cv = self.test()
+        print "the cross validation error is " 
+        print cv
         print "Without Clustering, the correct classification rate is"
         print 1-error[0]
         print '\n'
