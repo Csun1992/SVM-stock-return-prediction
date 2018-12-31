@@ -1,5 +1,5 @@
 import numpy as np
-from sklearn import preprocessing, cluster, model_selection, svm
+from sklearn import preprocessing, cluster, model_selection, svm, metrics
 from classifier import Classifier
 
 # Object that for svm with clustering 
