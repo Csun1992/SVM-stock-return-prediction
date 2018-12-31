@@ -5,10 +5,11 @@ from classifier import Classifier
 # Object that for svm with clustering 
 class svmStockPred(Classifier):
     def __init__(self, microDataLoc, clusterNum=1, macroDataLoc="data/clusterData.txt"):
-        Classifier.__init__(self, microDataLoc, clusterNum=1, macroDataLoc="data/clusterData.txt")
+        Classifier.__init__(self, microDataLoc, clusterNum, macroDataLoc="data/clusterData.txt")
 
     def train(self):
         train, test, trainLabel, testLabel = self.trainTestSplit()
+        print testLabel
         clf = [svm.SVC() for i in range(self.clusterNum)]
         cvScore = []
         for i in range(self.clusterNum):
@@ -48,15 +49,15 @@ class svmNoCluster(svmStockPred):
 
             
 if __name__ == "__main__":
-
+    """
     # without clustering
     apple = svmNoCluster("data/appleTrainData.txt")
     apple.reportResult()
-
+    """
     # for the case when cluster = 3
     apple = svmStockPred("data/appleTrainData.txt", clusterNum=3)
     apple.reportResult()
-        
+    """       
     # Case when 2 clusters
     apple = svmStockPred("data/appleTrainData.txt", clusterNum=2)
     apple.reportResult()
@@ -90,3 +91,4 @@ if __name__ == "__main__":
     # Case when 1 cluster
     att = svmStockPred("data/attTrainData.txt", clusterNum=1)
     att.reportResult()
+    """

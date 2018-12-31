@@ -36,6 +36,7 @@ class Classifier(object):
             test.append(testData)
             trainLabel.append(trainLabelData)
             testLabel.append(testLabelData)
+        print testLabel    
         return (train, test, trainLabel, testLabel)
             
     def train(self):
