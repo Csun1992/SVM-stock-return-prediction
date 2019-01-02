@@ -62,7 +62,8 @@ class Classifier(object):
 
     def reportResult(self):
         f1, cv = self.test()
-        print "the cross validation error is " 
+        print "For the case when cluster = " + str(self.clusterNum)
+        print "The cross validation error is " 
         print cv
         for i in range(self.clusterNum):
             print "group NO." + str(i+1) + " F1 score is"
