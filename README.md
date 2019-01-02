@@ -1,5 +1,7 @@
 # Project Purpose
-We predict stock price moving direction with K-means clustering and support vector machine
+This is the first step in building a full-fledged recommendation system which manages the allocation of assets of customers based on their risk tolerance, and the profitability of the investments etc.
+
+In this repository we predict stock price moving direction with K-means clustering and support vector machine
 
 # Dependencies
 - Numpy
