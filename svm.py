@@ -1,4 +1,6 @@
 import numpy as np
+from collections import Counter
+from sklearn.decomposition import KernelPCA as pca
 from sklearn import preprocessing, cluster, model_selection, svm
 from sklearn.metrics import f1_score
 from classifier import Classifier
@@ -34,31 +36,33 @@ class svmNoCluster(svmStockPred):
         microData = np.loadtxt(self.microDataLoc)
         macroData = np.loadtxt(self.macroDataLoc)
         data = np.concatenate((macroData, microData), axis=1)
+        labels = data[:, -1]
+        nComponents = min(max(np.size(data, 0)/ 30, 1), np.size(data, 1)) # each feature needs 30 samples
+        data = pca(n_components = nComponents, kernel = 'linear').fit_transform(data[:, :-1])
         for i in range(self.clusterNum):
-            group.append(data[: , :-1])
-            label.append(data[: , -1])
+            group.append(data)
+            label.append(labels)
         return (group, label)
 
     def reportResult(self):
-        error, cv = self.test()
+        f1, cv = self.test()
         print "the cross validation f1 score is " 
         print cv
         print "Without Clustering, the correct classification rate is"
-        print 1-error[0]
+        print f1 
         print '\n'
-        return error
+        return f1 
 
             
 if __name__ == "__main__":
-    """
     # without clustering
     apple = svmNoCluster("data/appleTrainData.txt")
     apple.reportResult()
-    """
+
     # for the case when cluster = 3
     apple = svmStockPred("data/appleTrainData.txt", clusterNum=3)
     apple.reportResult()
-    """       
+
     # Case when 2 clusters
     apple = svmStockPred("data/appleTrainData.txt", clusterNum=2)
     apple.reportResult()
@@ -92,4 +96,3 @@ if __name__ == "__main__":
     # Case when 1 cluster
     att = svmStockPred("data/attTrainData.txt", clusterNum=1)
     att.reportResult()
-    """
