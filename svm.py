@@ -20,6 +20,8 @@ class svmStockPred(Classifier):
             cvScore.append(score.mean()) 
         for i in range(self.clusterNum):
             clf[i].fit(train[i], trainLabel[i])
+#        a = clf[i].predict(trainLabel[i])
+#print f1_score(trainLael[i], a, average='micro')
         return (clf, test, testLabel, cvScore) # return test and testLabel to self.test() so no need to
                                       # recompute the testing data again
 
