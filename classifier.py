@@ -23,13 +23,13 @@ class Classifier(object):
     def prepareData(self):
         data = np.loadtxt(self.microDataLoc)
         groupNum = self.cluster()
-        minSize = min(Counter(groupNum).values())
-        nComponents = min(max(minSize / 30, 1), np.size(data, 1))
+        minSize = min(Counter(groupNum).values()) # find the smallest sample size among all groups
+        nComponents = min(max(minSize / 30, 1), np.size(data, 1)) # each feature needs 30 samples
         labels = data[:, -1]
         data = pca(n_components = nComponents, kernel = 'linear').fit_transform(data[:, :-1])
         group, label = [], []
         for i in range(self.clusterNum):
-            group.append(data[groupNum==i, :-1])
+            group.append(data[groupNum==i])
             label.append(labels[groupNum==i])
         return (group, label)
 
