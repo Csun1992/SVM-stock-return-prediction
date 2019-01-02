@@ -1,5 +1,6 @@
 import numpy as np
-from sklearn import preprocessing, cluster, model_selection, svm, metrics
+from sklearn import preprocessing, cluster, model_selection, svm
+from sklearn.metrics import f1_score
 from classifier import Classifier
 
 # Object that for svm with clustering 
@@ -9,11 +10,11 @@ class svmStockPred(Classifier):
 
     def train(self):
         train, test, trainLabel, testLabel = self.trainTestSplit()
-        print testLabel
         clf = [svm.SVC() for i in range(self.clusterNum)]
         cvScore = []
         for i in range(self.clusterNum):
-            score = model_selection.cross_val_score(clf[i], train[i], trainLabel[i], cv = 10) 
+            score = model_selection.cross_val_score(clf[i], train[i], trainLabel[i], cv = 5,
+                    scoring = 'f1_micro') 
             cvScore.append(score.mean()) 
         for i in range(self.clusterNum):
             clf[i].fit(train[i], trainLabel[i])
@@ -40,7 +41,7 @@ class svmNoCluster(svmStockPred):
 
     def reportResult(self):
         error, cv = self.test()
-        print "the cross validation error is " 
+        print "the cross validation f1 score is " 
         print cv
         print "Without Clustering, the correct classification rate is"
         print 1-error[0]
