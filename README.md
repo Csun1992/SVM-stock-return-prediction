@@ -31,9 +31,10 @@ The stocks we used as examples include Apple,ATT.
 3. The python file *svm.py*. This is the main file. It implements the algorithm. In this file, we created an *svmStockPred* that inherits from *Classifier* -- a virtual class that all classifiers inherit form which can be constructed with the information about the location of the transformed clustering and classification data files. If want to find the final result about the testing error, we can simply call *reportResult()* method embedded in the object. It automatically runs the algorithm and reports tesing error. By default we set have "80-20" split for the training and tesing data.<br />
 In addition, for comparison, we implemented a *svmNoClustering* object that inherits from the *svmStockPred*. In this derived class, we simply implement a svm with the clustering and classification data combined. Similar to the parent class, we can simply call the *reportResult()* method in this derived class to find out the testing errors.
 
+# Difficulty
+The best features for predicting the stock movement. 
+
 # Future Work
 1. To compare the statistical difference of the performance between the svm with clustering and the svm without clustering, we are planning to perform certain hypothesis testing. 
 2. The data amount is still relatively small if we cluster them into three or four clusters. Thus we will perform experiment on the weekly data.
 3. Combine the two svm's into one with ensemble methods to see how big improvement we can have.
-4. Use the same dataset to implement RNN to compare the results. Perform PCA on the data dimensions
-if overfitting occurs.
