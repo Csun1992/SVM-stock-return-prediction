@@ -15,6 +15,7 @@ class svmStockPred(Classifier):
         train, test, trainLabel, testLabel = self.trainTestSplit()
         clf = [svm.SVC() for i in range(self.clusterNum)]
         cvScore = []
+        """
         kf = model_selection.KFold(n_splits = 40)
         totalErr = 0
         print kf.split(train[1])
@@ -30,21 +31,11 @@ class svmStockPred(Classifier):
             error = sum([i != j for (i, j) in zip(result, testLabelcv)])
             totalErr = totalErr + error/float(length)
         print totalErr/20
- #for i in range(self.clusterNum):
-  #          score = model_selection.cross_validate(clf[i], train[i], trainLabel[i], cv = 5, scoring
-   #                 = 'precision', return_train_score = True) 
-    #        print len(trainLabel[i])
-     #       print sum(trainLabel[i])/float(len(trainLabel[i]))
-      #      print score
-       #     clf[i].fit(train[i], trainLabel[i])
-        #    print score['test_score']
-         #   print score['test_score'].mean()
-        exit()
-#cvScore.append(score['test_score'].mean()) 
+        """
         for i in range(self.clusterNum):
-            clf[i].fit(train[i], trainLabel[i])
-#        a = clf[i].predict(trainLabel[i])
-#print f1_score(trainLael[i], a, average='micro')
+            score = model_selection.cross_validate(clf[i], train[i], trainLabel[i], cv = 5, scoring
+                 = 'f1', return_train_score = True) 
+            cvScore.append(score['test_score'].mean()) 
         return (clf, test, testLabel, cvScore) # return test and testLabel to self.test() so no need to
                                       # recompute the testing data again
 
