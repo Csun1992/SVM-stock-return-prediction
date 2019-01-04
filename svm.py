@@ -1,4 +1,5 @@
 import numpy as np
+from sys import exit
 from collections import Counter
 from sklearn.decomposition import KernelPCA as pca
 from sklearn import preprocessing, cluster, model_selection, svm
@@ -15,9 +16,17 @@ class svmStockPred(Classifier):
         clf = [svm.SVC() for i in range(self.clusterNum)]
         cvScore = []
         for i in range(self.clusterNum):
-            score = model_selection.cross_val_score(clf[i], train[i], trainLabel[i], cv = 5,
-                    scoring = 'f1_micro') 
-            cvScore.append(score.mean()) 
+            score = model_selection.cross_validate(clf[i], train[i], trainLabel[i], cv = 5, scoring
+                    = 'recall', return_train_score = True) 
+            print score
+            clf[i].fit(train[i], trainLabel[i])
+            a = clf[i].predict(train[i])
+            b = trainLabel[i]
+            print sum([i != j for (i, j) in zip(a,b)])
+            print score['test_score']
+            print score['test_score'].mean()
+            exit()
+            cvScore.append(score['test_score'].mean()) 
         for i in range(self.clusterNum):
             clf[i].fit(train[i], trainLabel[i])
 #        a = clf[i].predict(trainLabel[i])
