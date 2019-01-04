@@ -15,18 +15,32 @@ class svmStockPred(Classifier):
         train, test, trainLabel, testLabel = self.trainTestSplit()
         clf = [svm.SVC() for i in range(self.clusterNum)]
         cvScore = []
-        for i in range(self.clusterNum):
-            score = model_selection.cross_validate(clf[i], train[i], trainLabel[i], cv = 5, scoring
-                    = 'precision', return_train_score = True) 
-            print score
-            clf[i].fit(train[i], trainLabel[i])
-            a = clf[i].predict(train[i])
-            b = trainLabel[i]
-            print sum([i != j for (i, j) in zip(a,b)])
-            print score['test_score']
-            print score['test_score'].mean()
-            exit()
-            cvScore.append(score['test_score'].mean()) 
+        kf = model_selection.KFold(n_splits = 40)
+        totalErr = 0
+        print kf.split(train[1])
+        for trainIndex, testIndex in kf.split(train[1]):
+            trainDat, testDat = train[1][trainIndex], train[1][testIndex]
+            trainLabelcv, testLabelcv = trainLabel[1][trainIndex], trainLabel[1][testIndex]
+            clf[1].fit(trainDat, trainLabelcv)
+            result = clf[1].predict(testDat)
+            length = len(result)
+            print result
+            print testLabelcv
+            print '\n'
+            error = sum([i != j for (i, j) in zip(result, testLabelcv)])
+            totalErr = totalErr + error/float(length)
+        print totalErr/20
+ #for i in range(self.clusterNum):
+  #          score = model_selection.cross_validate(clf[i], train[i], trainLabel[i], cv = 5, scoring
+   #                 = 'precision', return_train_score = True) 
+    #        print len(trainLabel[i])
+     #       print sum(trainLabel[i])/float(len(trainLabel[i]))
+      #      print score
+       #     clf[i].fit(train[i], trainLabel[i])
+        #    print score['test_score']
+         #   print score['test_score'].mean()
+        exit()
+#cvScore.append(score['test_score'].mean()) 
         for i in range(self.clusterNum):
             clf[i].fit(train[i], trainLabel[i])
 #        a = clf[i].predict(trainLabel[i])
@@ -67,8 +81,8 @@ class svmNoCluster(svmStockPred):
             
 if __name__ == "__main__":
     # without clustering
-    apple = svmNoCluster("data/appleTrainData.txt")
-    apple.reportResult()
+#apple = svmNoCluster("data/appleTrainData.txt")
+#    apple.reportResult()
 
     # for the case when cluster = 3
     apple = svmStockPred("data/appleTrainData.txt", clusterNum=3)
