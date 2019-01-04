@@ -17,7 +17,7 @@ class svmStockPred(Classifier):
         cvScore = []
         for i in range(self.clusterNum):
             score = model_selection.cross_validate(clf[i], train[i], trainLabel[i], cv = 5, scoring
-                    = 'recall', return_train_score = True) 
+                    = 'precision', return_train_score = True) 
             print score
             clf[i].fit(train[i], trainLabel[i])
             a = clf[i].predict(train[i])
