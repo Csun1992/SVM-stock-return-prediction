@@ -54,19 +54,24 @@ class Classifier(object):
         clf, test, testLabel, cv = self.train()
         f1 = []
         for i in range(self.clusterNum):
-            pred = (clf[i].predict(test[i]) == 1)
-            f1.append(f1_score(testLabel[i], pred, average = 'micro'))
+            pred = clf[i].predict(test[i]) 
+            individualF1 = f1_score(testLabel[i], pred)
+            f1.append(individualF1)
+
+#f1.append(f1_score(testLabel[i], pred, average = 'micro'))
 #caseError = sum([i != j for (i,j) in zip(testLabel[i], pred)])
 #error.append(float(caseError)/len(pred))
         return (f1, cv)
 
     def reportResult(self):
         f1, cv = self.test()
-        print "For the case when cluster = " + str(self.clusterNum)
-        print "The cross validation error is " 
-        print cv
+        print "For the case when cluster = " + str(self.clusterNum) + ' :'
+        print '\n'
+        print "The cross validation f1 score is " 
+        print ', '.join(map(str, [round(i, 2) for i in cv]))
+        print '\n'
         for i in range(self.clusterNum):
-            print "group NO." + str(i+1) + " F1 score is"
-            print f1[i]
+            print "group NO." + str(i+1) + " f1 score is"
+            print  round(f1[i], 2)
         print '\n'
         return f1 

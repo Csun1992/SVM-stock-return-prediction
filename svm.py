@@ -36,6 +36,8 @@ class svmStockPred(Classifier):
             score = model_selection.cross_validate(clf[i], train[i], trainLabel[i], cv = 5, scoring
                  = 'f1', return_train_score = True) 
             cvScore.append(score['test_score'].mean()) 
+        for i in range(self.clusterNum):
+            clf[i].fit(train[i], trainLabel[i])
         return (clf, test, testLabel, cvScore) # return test and testLabel to self.test() so no need to
                                       # recompute the testing data again
 
@@ -64,51 +66,36 @@ class svmNoCluster(svmStockPred):
         f1, cv = self.test()
         print "the cross validation f1 score is " 
         print cv
-        print "Without Clustering, the correct classification rate is"
+        print "Without Clustering, the f1 score is"
         print f1 
         print '\n'
         return f1 
 
             
 if __name__ == "__main__":
-    # without clustering
-#apple = svmNoCluster("data/appleTrainData.txt")
-#    apple.reportResult()
+    companies = ['microsoft', 'apple', 'att', 'ford', 'sony', 'gap', 'fedex', 'mcdonalds', 'nike',
+    'tiffany', 'homeDepot', 'walmart', 'cocaCola', 'avon', 'oracle', 'ibm', 'intel',
+    'harley-davidson', 'toyota', 'honda', 'boeing', 'jpmorgan', 'boa', 'amgen', 'hermanMiller',
+    'nissan', 'generalElectric', 'nextEra', 'conocoPhillips', 'bakerHughes', 'dukeEnergy', 'chevron']
+    for companyName in companies:
+        print companyName
+        name = "data/" + companyName + "TrainData.txt"
+        # without clustering
+        stock = svmNoCluster(name)
+        stock.reportResult()
 
-    # for the case when cluster = 3
-    apple = svmStockPred("data/appleTrainData.txt", clusterNum=3)
-    apple.reportResult()
+        # Case when 4 clusters
+        stock = svmStockPred(name, clusterNum=4)
+        stock.reportResult()
+   
+        # for the case when cluster = 3
+        stock = svmStockPred(name, clusterNum = 3)
+        stock.reportResult()
 
-    # Case when 2 clusters
-    apple = svmStockPred("data/appleTrainData.txt", clusterNum=2)
-    apple.reportResult()
-       
-    # Case when 4 clusters
-    apple = svmStockPred("data/appleTrainData.txt", clusterNum=4)
-    apple.reportResult()
+        # Case when 2 clusters
+        stock = svmStockPred(name, clusterNum=2)
+        stock.reportResult()
 
-    # Case when 1 cluster
-    apple = svmStockPred("data/appleTrainData.txt", clusterNum=1)
-    apple.reportResult()
-
-
-    
-    # without clustering
-    att = svmStockPred("data/attTrainData.txt")
-    att.reportResult()
-
-    # for the case when cluster = 3
-    att = svmStockPred("data/attTrainData.txt", clusterNum=3)
-    att.reportResult()
-        
-    # Case when 2 clusters
-    att = svmStockPred("data/attTrainData.txt", clusterNum=2)
-    att.reportResult()
-       
-    # Case when 4 clusters
-    att = svmStockPred("data/attTrainData.txt", clusterNum=4)
-    att.reportResult()
-
-    # Case when 1 cluster
-    att = svmStockPred("data/attTrainData.txt", clusterNum=1)
-    att.reportResult()
+        # Case when 1 cluster
+        stock = svmStockPred(name, clusterNum=1)
+        stock.reportResult()
