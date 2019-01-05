@@ -69,4 +69,5 @@ class Classifier(object):
         for i in range(self.clusterNum):
             print "group NO." + str(i+1) + " f1 score is"
             print  round(f1[i], 2)
+        print '\n'
         return f1 

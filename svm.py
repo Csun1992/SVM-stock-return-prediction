@@ -65,7 +65,8 @@ class svmNoCluster(svmStockPred):
     def reportResult(self):
         f1, cv = self.test()
         print "Without Clustering, the f1 score is"
-        print f1 
+        print f1[0]
+        print '\n'
         return f1 
 
             
@@ -80,20 +81,20 @@ if __name__ == "__main__":
         # without clustering
         stock = svmNoCluster(name)
         stock.reportResult()
-
-        # Case when 4 clusters
-        stock = svmStockPred(name, clusterNum=4)
-        stock.reportResult()
-   
-        # for the case when cluster = 3
+        print '\n'
+# # Case when 4 clusters
+#        stock = svmStockPred(name, clusterNum=4)
+#        stock.reportResult()
+#   
+         # for the case when cluster = 3
         stock = svmStockPred(name, clusterNum = 3)
         stock.reportResult()
-
-        # Case when 2 clusters
-        stock = svmStockPred(name, clusterNum=2)
-        stock.reportResult()
-
-        # Case when 1 cluster
-        stock = svmStockPred(name, clusterNum=1)
-        stock.reportResult()
-        print '\n'
+#
+#        # Case when 2 clusters
+#        stock = svmStockPred(name, clusterNum=2)
+#        stock.reportResult()
+#
+#        # Case when 1 cluster
+#        stock = svmStockPred(name, clusterNum=1)
+#        stock.reportResult()
+#        print '\n'
