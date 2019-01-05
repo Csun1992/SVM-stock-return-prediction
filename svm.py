@@ -60,6 +60,10 @@ class svmNoCluster(svmStockPred):
         data = np.concatenate((macroData, microData), axis=1)
         label = data[:, -1]
         data = data[:, :-1]
+        """
+        nComponents = min(max(np.size(data, 0)/ 30, 1), np.size(data, 1)) # each feature needs 30 samples
+        data = pca(n_components = nComponents, kernel = 'linear').fit_transform(data[:, :-1])
+        """
         return (data, label)
 
     def trainTestSplit(self):
