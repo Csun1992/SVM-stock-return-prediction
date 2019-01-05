@@ -12,33 +12,38 @@ class svmStockPred(Classifier):
         Classifier.__init__(self, microDataLoc, clusterNum, macroDataLoc="data/clusterData.txt")
 
     def train(self):
+        cvForDiffClusters = []
         train, test, trainLabel, testLabel = self.trainTestSplit()
-        clf = [svm.SVC() for i in range(self.clusterNum)]
-        cvScore = []
-        """
-        kf = model_selection.KFold(n_splits = 40)
-        totalErr = 0
-        print kf.split(train[1])
-        for trainIndex, testIndex in kf.split(train[1]):
-            trainDat, testDat = train[1][trainIndex], train[1][testIndex]
-            trainLabelcv, testLabelcv = trainLabel[1][trainIndex], trainLabel[1][testIndex]
-            clf[1].fit(trainDat, trainLabelcv)
-            result = clf[1].predict(testDat)
-            length = len(result)
-            print result
-            print testLabelcv
-            print '\n'
-            error = sum([i != j for (i, j) in zip(result, testLabelcv)])
-            totalErr = totalErr + error/float(length)
-        print totalErr/20
-        """
-        for i in range(self.clusterNum):
-            score = model_selection.cross_validate(clf[i], train[i], trainLabel[i], cv = 5, scoring
-                 = 'f1', return_train_score = True) 
-            cvScore.append(score['test_score'].mean()) 
-        for i in range(self.clusterNum):
+        for clusterNum in range(1, 5):
+            cvScore = []
+            clf = [svm.SVC() for i in range(self.clusterNum)]
+            """
+            kf = model_selection.KFold(n_splits = 40)
+            totalErr = 0
+            print kf.split(train[1])
+            for trainIndex, testIndex in kf.split(train[1]):
+                trainDat, testDat = train[1][trainIndex], train[1][testIndex]
+                trainLabelcv, testLabelcv = trainLabel[1][trainIndex], trainLabel[1][testIndex]
+                clf[1].fit(trainDat, trainLabelcv)
+                result = clf[1].predict(testDat)
+                length = len(result)
+                print result
+                print testLabelcv
+                print '\n'
+                error = sum([i != j for (i, j) in zip(result, testLabelcv)])
+                totalErr = totalErr + error/float(length)
+            print totalErr/20
+            """
+            for i in range(clusterNum):
+                score = model_selection.cross_validate(clf[i], train[i], trainLabel[i], cv = 5, scoring
+                     = 'f1', return_train_score = True) 
+                cvScore.append(score['test_score'].mean()) 
+            cvForDiffClusters.append(cvScore.mean())
+        clusterNum = cvForDiffClusters.index(max(cvForDiffClusters)) + 1 
+        print clusterNum
+        for i in range(clusterNum):
             clf[i].fit(train[i], trainLabel[i])
-        return (clf, test, testLabel, cvScore) # return test and testLabel to self.test() so no need to
+        return (clf, test, testLabel, clusterNum) # return test and testLabel to self.test() so no need to
                                       # recompute the testing data again
 
 
@@ -87,7 +92,7 @@ if __name__ == "__main__":
 #        stock.reportResult()
 #   
          # for the case when cluster = 3
-        stock = svmStockPred(name, clusterNum = 3)
+        stock = svmStockPred(name, clusterNum = 4)
         stock.reportResult()
 #
 #        # Case when 2 clusters

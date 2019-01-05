@@ -11,16 +11,15 @@ class Classifier(object):
     def __init__(self, microDataLoc, clusterNum=1, macroDataLoc="data/clusterData.txt"):
         self.microDataLoc = microDataLoc
         self.macroDataLoc = macroDataLoc
-        self.clusterNum = clusterNum
 
-    def cluster(self):
+    def cluster(self, clusterNum):
         data = np.loadtxt(self.macroDataLoc)
         cleanData = preprocessing.scale(data)
-        kmeans = cluster.KMeans(n_clusters=self.clusterNum, random_state=11).fit(cleanData)
+        kmeans = cluster.KMeans(n_clusters=clusterNum, random_state=11).fit(cleanData)
         groupNum = np.array(kmeans.labels_)
         return groupNum
 
-    def prepareData(self):
+    def prepareData(self, clusterNum):
         data = np.loadtxt(self.microDataLoc)
         groupNum = self.cluster()
         minSize = min(Counter(groupNum).values()) # find the smallest sample size among all groups
@@ -28,15 +27,15 @@ class Classifier(object):
         labels = data[:, -1]
         data = pca(n_components = nComponents, kernel = 'linear').fit_transform(data[:, :-1])
         group, label = [], []
-        for i in range(self.clusterNum):
+        for i in range(clusterNum):
             group.append(data[groupNum==i])
             label.append(labels[groupNum==i])
         return (group, label)
 
-    def trainTestSplit(self):
+    def trainTestSplit(self, clusterNum):
         train, test, trainLabel, testLabel = [], [], [], []
         group, label = self.prepareData()
-        for i in range(self.clusterNum):
+        for i in range(clusterNum):
             trainData, testData, trainLabelData, testLabelData = model_selection.train_test_split(group[i],
                     label[i], test_size=0.3, random_state=11)
             train.append(trainData)
@@ -51,9 +50,9 @@ class Classifier(object):
                     # must return a tuple of classifier instances, test data and test labels
 
     def test(self):
-        clf, test, testLabel, cv = self.train()
+        clf, test, testLabel, clusterNum = self.train()
         f1 = []
-        for i in range(self.clusterNum):
+        for i in range(clusterNum):
             pred = clf[i].predict(test[i]) 
             individualF1 = f1_score(testLabel[i], pred)
             f1.append(individualF1)
@@ -61,12 +60,12 @@ class Classifier(object):
 #f1.append(f1_score(testLabel[i], pred, average = 'micro'))
 #caseError = sum([i != j for (i,j) in zip(testLabel[i], pred)])
 #error.append(float(caseError)/len(pred))
-        return (f1, cv)
+        return (f1, clusterNum)
 
     def reportResult(self):
-        f1, cv = self.test()
-        print "For the case when cluster = " + str(self.clusterNum) + ' :'
-        for i in range(self.clusterNum):
+        f1, clusterNum = self.test()
+        print "For the case when cluster = " + str(clusterNum) + ' :'
+        for i in range(clusterNum):
             print "group NO." + str(i+1) + " f1 score is"
             print  round(f1[i], 2)
         print '\n'
