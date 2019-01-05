@@ -34,7 +34,7 @@ The stocks we used as examples include Apple,ATT.
 In addition, for comparison, we implemented a *svmNoClustering* object that inherits from the *svmStockPred*. In this derived class, we simply implement a svm with the clustering and classification data combined. Similar to the parent class, we can simply call the *reportResult()* method in this derived class to find out the testing errors.
 
 # Difficulty
-The best features for predicting the stock movement. 
+It is hard to find the best features for predicting the stock movement. The PCA does not seem to help much with current features. 
 
 # Future Work
 1. To compare the statistical difference of the performance between the svm with clustering and the svm without clustering, we are planning to perform certain hypothesis testing. 
