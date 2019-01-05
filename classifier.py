@@ -66,12 +66,7 @@ class Classifier(object):
     def reportResult(self):
         f1, cv = self.test()
         print "For the case when cluster = " + str(self.clusterNum) + ' :'
-        print '\n'
-        print "The cross validation f1 score is " 
-        print ', '.join(map(str, [round(i, 2) for i in cv]))
-        print '\n'
         for i in range(self.clusterNum):
             print "group NO." + str(i+1) + " f1 score is"
             print  round(f1[i], 2)
-        print '\n'
         return f1 

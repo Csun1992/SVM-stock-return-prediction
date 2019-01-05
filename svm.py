@@ -64,21 +64,18 @@ class svmNoCluster(svmStockPred):
 
     def reportResult(self):
         f1, cv = self.test()
-        print "the cross validation f1 score is " 
-        print cv
         print "Without Clustering, the f1 score is"
         print f1 
-        print '\n'
         return f1 
 
             
 if __name__ == "__main__":
-    companies = ['microsoft', 'apple', 'att', 'ford', 'sony', 'gap', 'fedex', 'mcdonalds', 'nike',
+    companies = ['microsoft', 'apple', 'att', 'sony', 'gap', 'fedex', 'mcdonalds', 'nike',
     'tiffany', 'homeDepot', 'walmart', 'cocaCola', 'avon', 'oracle', 'ibm', 'intel',
     'harley-davidson', 'toyota', 'honda', 'boeing', 'jpmorgan', 'boa', 'amgen', 'hermanMiller',
     'nissan', 'generalElectric', 'nextEra', 'conocoPhillips', 'bakerHughes', 'dukeEnergy', 'chevron']
     for companyName in companies:
-        print companyName
+        print "The stock we are considering now is " + companyName
         name = "data/" + companyName + "TrainData.txt"
         # without clustering
         stock = svmNoCluster(name)
@@ -99,3 +96,4 @@ if __name__ == "__main__":
         # Case when 1 cluster
         stock = svmStockPred(name, clusterNum=1)
         stock.reportResult()
+        print '\n'
