@@ -8,7 +8,7 @@ from sklearn.metrics import f1_score
 # Other classifiers will inherit from this class and rewrite the train() method
 
 class Classifier(object):
-    def __init__(self, microDataLoc, clusterNum=1, macroDataLoc="data/clusterData.txt"):
+    def __init__(self, microDataLoc, macroDataLoc="data/clusterData.txt"):
         self.microDataLoc = microDataLoc
         self.macroDataLoc = macroDataLoc
 
@@ -21,7 +21,7 @@ class Classifier(object):
 
     def prepareData(self, clusterNum):
         data = np.loadtxt(self.microDataLoc)
-        groupNum = self.cluster()
+        groupNum = self.cluster(clusterNum)
         minSize = min(Counter(groupNum).values()) # find the smallest sample size among all groups
         nComponents = min(max(minSize / 30, 1), np.size(data, 1)) # each feature needs 30 samples
         labels = data[:, -1]
@@ -34,7 +34,7 @@ class Classifier(object):
 
     def trainTestSplit(self, clusterNum):
         train, test, trainLabel, testLabel = [], [], [], []
-        group, label = self.prepareData()
+        group, label = self.prepareData(clusterNum)
         for i in range(clusterNum):
             trainData, testData, trainLabelData, testLabelData = model_selection.train_test_split(group[i],
                     label[i], test_size=0.3, random_state=11)
