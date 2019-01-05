@@ -5,8 +5,7 @@ Without Clustering, the f1 score is
 0.739393939394
 
 
-
-
+4
 For the case when cluster = 4 :
 group NO.1 f1 score is
 0.74
@@ -23,17 +22,10 @@ Without Clustering, the f1 score is
 0.691823899371
 
 
-
-
-For the case when cluster = 4 :
+1
+For the case when cluster = 1 :
 group NO.1 f1 score is
 0.74
-group NO.2 f1 score is
-0.72
-group NO.3 f1 score is
-0.69
-group NO.4 f1 score is
-0.81
 
 
 The stock we are considering now is att
@@ -41,17 +33,12 @@ Without Clustering, the f1 score is
 0.746987951807
 
 
-
-
-For the case when cluster = 4 :
+2
+For the case when cluster = 2 :
 group NO.1 f1 score is
 0.71
 group NO.2 f1 score is
 0.72
-group NO.3 f1 score is
-0.69
-group NO.4 f1 score is
-0.71
 
 
 The stock we are considering now is sony
@@ -59,16 +46,9 @@ Without Clustering, the f1 score is
 0.640522875817
 
 
-
-
-For the case when cluster = 4 :
+1
+For the case when cluster = 1 :
 group NO.1 f1 score is
-0.0
-group NO.2 f1 score is
-0.61
-group NO.3 f1 score is
-0.79
-group NO.4 f1 score is
 0.0
 
 
@@ -77,17 +57,10 @@ Without Clustering, the f1 score is
 0.622516556291
 
 
-
-
-For the case when cluster = 4 :
+1
+For the case when cluster = 1 :
 group NO.1 f1 score is
 0.63
-group NO.2 f1 score is
-0.72
-group NO.3 f1 score is
-0.69
-group NO.4 f1 score is
-0.81
 
 
 The stock we are considering now is fedex
@@ -95,17 +68,12 @@ Without Clustering, the f1 score is
 0.731707317073
 
 
-
-
-For the case when cluster = 4 :
+2
+For the case when cluster = 2 :
 group NO.1 f1 score is
 0.74
 group NO.2 f1 score is
 0.56
-group NO.3 f1 score is
-0.73
-group NO.4 f1 score is
-0.0
 
 
 The stock we are considering now is mcdonalds
@@ -113,17 +81,12 @@ Without Clustering, the f1 score is
 0.723926380368
 
 
-
-
-For the case when cluster = 4 :
+2
+For the case when cluster = 2 :
 group NO.1 f1 score is
 0.78
 group NO.2 f1 score is
 0.69
-group NO.3 f1 score is
-0.81
-group NO.4 f1 score is
-0.81
 
 
 The stock we are considering now is nike
@@ -131,17 +94,12 @@ Without Clustering, the f1 score is
 0.804597701149
 
 
-
-
-For the case when cluster = 4 :
+2
+For the case when cluster = 2 :
 group NO.1 f1 score is
 0.74
 group NO.2 f1 score is
 0.76
-group NO.3 f1 score is
-0.81
-group NO.4 f1 score is
-0.78
 
 
 The stock we are considering now is tiffany
@@ -149,17 +107,14 @@ Without Clustering, the f1 score is
 0.716049382716
 
 
-
-
-For the case when cluster = 4 :
+3
+For the case when cluster = 3 :
 group NO.1 f1 score is
 0.74
 group NO.2 f1 score is
 0.0
 group NO.3 f1 score is
 0.71
-group NO.4 f1 score is
-0.81
 
 
 The stock we are considering now is homeDepot
@@ -167,17 +122,12 @@ Without Clustering, the f1 score is
 0.708074534161
 
 
-
-
-For the case when cluster = 4 :
+2
+For the case when cluster = 2 :
 group NO.1 f1 score is
 0.78
 group NO.2 f1 score is
 0.61
-group NO.3 f1 score is
-0.62
-group NO.4 f1 score is
-0.0
 
 
 The stock we are considering now is walmart
@@ -185,17 +135,12 @@ Without Clustering, the f1 score is
 0.754491017964
 
 
-
-
-For the case when cluster = 4 :
+2
+For the case when cluster = 2 :
 group NO.1 f1 score is
 0.74
 group NO.2 f1 score is
 0.72
-group NO.3 f1 score is
-0.77
-group NO.4 f1 score is
-0.0
 
 
 The stock we are considering now is cocaCola
@@ -203,17 +148,10 @@ Without Clustering, the f1 score is
 0.691823899371
 
 
-
-
-For the case when cluster = 4 :
+1
+For the case when cluster = 1 :
 group NO.1 f1 score is
 0.84
-group NO.2 f1 score is
-0.69
-group NO.3 f1 score is
-0.67
-group NO.4 f1 score is
-0.78
 
 
 The stock we are considering now is avon
@@ -221,17 +159,12 @@ Without Clustering, the f1 score is
 0.761904761905
 
 
-
-
-For the case when cluster = 4 :
+2
+For the case when cluster = 2 :
 group NO.1 f1 score is
 0.63
 group NO.2 f1 score is
 0.76
-group NO.3 f1 score is
-0.79
-group NO.4 f1 score is
-0.81
 
 
 The stock we are considering now is oracle
@@ -239,17 +172,10 @@ Without Clustering, the f1 score is
 0.691823899371
 
 
-
-
-For the case when cluster = 4 :
+1
+For the case when cluster = 1 :
 group NO.1 f1 score is
 0.78
-group NO.2 f1 score is
-0.69
-group NO.3 f1 score is
-0.79
-group NO.4 f1 score is
-0.67
 
 
 The stock we are considering now is ibm
@@ -257,17 +183,14 @@ Without Clustering, the f1 score is
 0.7
 
 
-
-
-For the case when cluster = 4 :
+3
+For the case when cluster = 3 :
 group NO.1 f1 score is
 0.63
 group NO.2 f1 score is
 0.72
 group NO.3 f1 score is
 0.71
-group NO.4 f1 score is
-0.0
 
 
 The stock we are considering now is intel
@@ -275,17 +198,12 @@ Without Clustering, the f1 score is
 0.769230769231
 
 
-
-
-For the case when cluster = 4 :
+2
+For the case when cluster = 2 :
 group NO.1 f1 score is
 0.58
 group NO.2 f1 score is
 0.82
-group NO.3 f1 score is
-0.69
-group NO.4 f1 score is
-0.67
 
 
 The stock we are considering now is harley-davidson
@@ -293,17 +211,12 @@ Without Clustering, the f1 score is
 0.723926380368
 
 
-
-
-For the case when cluster = 4 :
+2
+For the case when cluster = 2 :
 group NO.1 f1 score is
 0.78
 group NO.2 f1 score is
 0.56
-group NO.3 f1 score is
-0.73
-group NO.4 f1 score is
-0.0
 
 
 The stock we are considering now is toyota
@@ -311,17 +224,10 @@ Without Clustering, the f1 score is
 0.708074534161
 
 
-
-
-For the case when cluster = 4 :
+1
+For the case when cluster = 1 :
 group NO.1 f1 score is
 0.63
-group NO.2 f1 score is
-0.0
-group NO.3 f1 score is
-0.73
-group NO.4 f1 score is
-0.74
 
 
 The stock we are considering now is honda
@@ -329,16 +235,9 @@ Without Clustering, the f1 score is
 0.683544303797
 
 
-
-
-For the case when cluster = 4 :
+1
+For the case when cluster = 1 :
 group NO.1 f1 score is
-0.78
-group NO.2 f1 score is
-0.56
-group NO.3 f1 score is
-0.62
-group NO.4 f1 score is
 0.78
 
 
@@ -347,17 +246,10 @@ Without Clustering, the f1 score is
 0.708074534161
 
 
-
-
-For the case when cluster = 4 :
+1
+For the case when cluster = 1 :
 group NO.1 f1 score is
 0.71
-group NO.2 f1 score is
-0.61
-group NO.3 f1 score is
-0.79
-group NO.4 f1 score is
-0.81
 
 
 The stock we are considering now is jpmorgan
@@ -365,17 +257,12 @@ Without Clustering, the f1 score is
 0.739393939394
 
 
-
-
-For the case when cluster = 4 :
+2
+For the case when cluster = 2 :
 group NO.1 f1 score is
 0.58
 group NO.2 f1 score is
 0.69
-group NO.3 f1 score is
-0.81
-group NO.4 f1 score is
-0.71
 
 
 The stock we are considering now is boa
@@ -383,17 +270,12 @@ Without Clustering, the f1 score is
 0.683544303797
 
 
-
-
-For the case when cluster = 4 :
+2
+For the case when cluster = 2 :
 group NO.1 f1 score is
 0.63
 group NO.2 f1 score is
 0.61
-group NO.3 f1 score is
-0.71
-group NO.4 f1 score is
-0.0
 
 
 The stock we are considering now is amgen
@@ -401,17 +283,10 @@ Without Clustering, the f1 score is
 0.7
 
 
-
-
-For the case when cluster = 4 :
+1
+For the case when cluster = 1 :
 group NO.1 f1 score is
 0.78
-group NO.2 f1 score is
-0.72
-group NO.3 f1 score is
-0.83
-group NO.4 f1 score is
-0.63
 
 
 The stock we are considering now is hermanMiller
@@ -419,8 +294,7 @@ Without Clustering, the f1 score is
 0.683544303797
 
 
-
-
+4
 For the case when cluster = 4 :
 group NO.1 f1 score is
 0.63
@@ -437,17 +311,12 @@ Without Clustering, the f1 score is
 0.716049382716
 
 
-
-
-For the case when cluster = 4 :
+2
+For the case when cluster = 2 :
 group NO.1 f1 score is
 0.74
 group NO.2 f1 score is
 0.56
-group NO.3 f1 score is
-0.67
-group NO.4 f1 score is
-0.0
 
 
 The stock we are considering now is generalElectric
@@ -455,17 +324,10 @@ Without Clustering, the f1 score is
 0.631578947368
 
 
-
-
-For the case when cluster = 4 :
+1
+For the case when cluster = 1 :
 group NO.1 f1 score is
 0.74
-group NO.2 f1 score is
-0.72
-group NO.3 f1 score is
-0.67
-group NO.4 f1 score is
-0.63
 
 
 The stock we are considering now is nextEra
@@ -473,17 +335,12 @@ Without Clustering, the f1 score is
 0.746987951807
 
 
-
-
-For the case when cluster = 4 :
+2
+For the case when cluster = 2 :
 group NO.1 f1 score is
 0.78
 group NO.2 f1 score is
 0.82
-group NO.3 f1 score is
-0.81
-group NO.4 f1 score is
-0.93
 
 
 The stock we are considering now is conocoPhillips
@@ -491,17 +348,10 @@ Without Clustering, the f1 score is
 0.683544303797
 
 
-
-
-For the case when cluster = 4 :
+1
+For the case when cluster = 1 :
 group NO.1 f1 score is
 0.74
-group NO.2 f1 score is
-0.65
-group NO.3 f1 score is
-0.69
-group NO.4 f1 score is
-0.78
 
 
 The stock we are considering now is bakerHughes
@@ -509,17 +359,10 @@ Without Clustering, the f1 score is
 0.631578947368
 
 
-
-
-For the case when cluster = 4 :
+1
+For the case when cluster = 1 :
 group NO.1 f1 score is
 0.53
-group NO.2 f1 score is
-0.72
-group NO.3 f1 score is
-0.69
-group NO.4 f1 score is
-0.74
 
 
 The stock we are considering now is dukeEnergy
@@ -527,17 +370,12 @@ Without Clustering, the f1 score is
 0.7
 
 
-
-
-For the case when cluster = 4 :
+2
+For the case when cluster = 2 :
 group NO.1 f1 score is
 0.84
 group NO.2 f1 score is
 0.82
-group NO.3 f1 score is
-0.69
-group NO.4 f1 score is
-0.87
 
 
 The stock we are considering now is chevron
@@ -545,8 +383,7 @@ Without Clustering, the f1 score is
 0.7
 
 
-
-
+4
 For the case when cluster = 4 :
 group NO.1 f1 score is
 0.58
