@@ -1,10 +1,24 @@
 import numpy as np
 from sys import exit
+import matplotlib.pyplot as plt
 from collections import Counter
 from sklearn.decomposition import KernelPCA as pca
 from sklearn import preprocessing, cluster, model_selection, svm
-from sklearn.metrics import f1_score, precision_score, recall_score
+from sklearn.metrics import f1_score, precision_score, recall_score, precision_recall_curve
 from classifier import Classifier
+
+
+def f1Score(precision, recall):
+    return 1.0/(1.0 / precision + 1.0 / recall)
+
+def plotPrecisionRecall(precision, recall, thresholds):
+    plt.plot(thresholds, precision[:-1], "b--", label="Precision")
+    plt.plot(thresholds, recall[:-1], "g--", label="Recall")
+    plt.xlabel("Thresholds")
+    plt.legend(loc="upper left")
+    plt.ylim([0, 1])
+    
+
 
 # Object that for svm with clustering 
 class svmStockPred(Classifier):
@@ -15,6 +29,16 @@ class svmStockPred(Classifier):
         cvForDiffClusters = []
         for clusterNum in range(1, 5):
             train, test, trainLabel, testLabel = self.trainTestSplit(clusterNum)
+            clf = svm.SVC(C=1, kernel='rbf') 
+            yScores = model_selection.cross_val_predict(clf, train[0], trainLabel[0], cv=3,
+                    method='decision_function')
+            precision, recall, thresholds = precision_recall_curve(trainLabel[0], yScores)
+            print precision
+            print recall
+            print thresholds
+            plotPrecisionRecall(precision, recall, thresholds)
+            plt.show()
+            exit()
             cvScore = []
             clf = svm.SVC(C=1, kernel='rbf') 
             for i in range(clusterNum):
