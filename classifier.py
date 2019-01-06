@@ -2,7 +2,7 @@ import numpy as np
 from collections import Counter
 from sklearn import preprocessing, cluster, model_selection, svm
 from sklearn.decomposition import KernelPCA as pca
-from sklearn.metrics import f1_score 
+from sklearn.metrics import f1_score, precision_score, recall_score
 
 # This is a virtual class of classifier
 # Other classifiers will inherit from this class and rewrite the train() method
@@ -53,7 +53,7 @@ class Classifier(object):
         f1 = []
         for i in range(clusterNum):
             pred = clf[i].predict(test[i]) 
-            individualF1 = f1_score(testLabel[i], pred)
+            individualF1 = precision_score(testLabel[i], pred)
             f1.append(individualF1)
         return (f1, clusterNum)
 

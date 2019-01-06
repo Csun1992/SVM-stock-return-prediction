@@ -3,7 +3,7 @@ from sys import exit
 from collections import Counter
 from sklearn.decomposition import KernelPCA as pca
 from sklearn import preprocessing, cluster, model_selection, svm
-from sklearn.metrics import f1_score
+from sklearn.metrics import f1_score, precision_score, recall_score
 from classifier import Classifier
 
 # Object that for svm with clustering 
@@ -17,30 +17,14 @@ class svmStockPred(Classifier):
             train, test, trainLabel, testLabel = self.trainTestSplit(clusterNum)
             cvScore = []
             clf = svm.SVC(C=1, kernel='rbf') 
-            """
-            kf = model_selection.KFold(n_splits = 40)
-            totalErr = 0
-            print kf.split(train[1])
-            for trainIndex, testIndex in kf.split(train[1]):
-                trainDat, testDat = train[1][trainIndex], train[1][testIndex]
-                trainLabelcv, testLabelcv = trainLabel[1][trainIndex], trainLabel[1][testIndex]
-                clf[1].fit(trainDat, trainLabelcv)
-                result = clf[1].predict(testDat)
-                length = len(result)
-                print result
-                print testLabelcv
-                print '\n'
-                error = sum([i != j for (i, j) in zip(result, testLabelcv)])
-                totalErr = totalErr + error/float(length)
-            print totalErr/20
-            """
             for i in range(clusterNum):
                 score = model_selection.cross_validate(clf, train[i], trainLabel[i], cv = 5, scoring
-                     = 'f1', return_train_score = True) 
+                     = 'precision', return_train_score = True) 
                 cvScore.append(score['test_score'].mean()) 
             cvForDiffClusters.append(sum(cvScore)/float(len(cvScore)))
+        print cvForDiffClusters
         clusterNum = cvForDiffClusters.index(max(cvForDiffClusters)) + 1 
-        clf = [svm.SVC(C=100, kernel='poly', degree=3) for i in range(clusterNum)]
+        clf = [svm.SVC(C=1, kernel='rbf') for i in range(clusterNum)]
         for i in range(clusterNum):
             clf[i].fit(train[i], trainLabel[i])
         return (clf, test, testLabel, clusterNum) # return test and testLabel to self.test() so no need to
@@ -80,7 +64,7 @@ class svmNoCluster(svmStockPred):
     def test(self):
         clf, test, testLabel = self.train()
         pred = clf.predict(test) 
-        f1 = f1_score(testLabel, pred)
+        f1 = precision_score(testLabel, pred)
         return f1
 
     def reportResult(self):
