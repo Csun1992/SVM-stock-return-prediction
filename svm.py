@@ -16,7 +16,7 @@ class svmStockPred(Classifier):
         for clusterNum in range(1, 5):
             train, test, trainLabel, testLabel = self.trainTestSplit(clusterNum)
             cvScore = []
-            clf = svm.SVC(C=100, kernel='poly', degree=3) 
+            clf = svm.SVC(C=1, kernel='rbf') 
             """
             kf = model_selection.KFold(n_splits = 40)
             totalErr = 0
@@ -92,10 +92,11 @@ class svmNoCluster(svmStockPred):
 
             
 if __name__ == "__main__":
-    companies = ['microsoft', 'apple', 'att', 'sony', 'gap', 'fedex', 'mcdonalds', 'nike',
-    'tiffany', 'homeDepot', 'walmart', 'cocaCola', 'avon', 'oracle', 'ibm', 'intel',
-    'harley-davidson', 'toyota', 'honda', 'boeing', 'jpmorgan', 'boa', 'amgen', 'hermanMiller',
-    'nissan', 'generalElectric', 'nextEra', 'conocoPhillips', 'bakerHughes', 'dukeEnergy', 'chevron']
+#    companies = ['microsoft', 'apple', 'att', 'sony', 'gap', 'fedex', 'mcdonalds', 'nike',
+#    'tiffany', 'homeDepot', 'walmart', 'cocaCola', 'avon', 'oracle', 'ibm', 'intel',
+#    'harley-davidson', 'toyota', 'honda', 'boeing', 'jpmorgan', 'boa', 'amgen', 'hermanMiller',
+#    'nissan', 'generalElectric', 'nextEra', 'conocoPhillips', 'bakerHughes', 'dukeEnergy', 'chevron']
+    companies = ['mcdonalds']
     for companyName in companies:
         print "The stock we are considering now is " + companyName
         name = "data/" + companyName + "TrainData.txt"
