@@ -16,7 +16,7 @@ class svmStockPred(Classifier):
         for clusterNum in range(1, 5):
             train, test, trainLabel, testLabel = self.trainTestSplit(clusterNum)
             cvScore = []
-            clf = svm.SVC() 
+            clf = svm.SVC(C=100, kernel='poly', degree=3) 
             """
             kf = model_selection.KFold(n_splits = 40)
             totalErr = 0
@@ -40,7 +40,7 @@ class svmStockPred(Classifier):
                 cvScore.append(score['test_score'].mean()) 
             cvForDiffClusters.append(sum(cvScore)/float(len(cvScore)))
         clusterNum = cvForDiffClusters.index(max(cvForDiffClusters)) + 1 
-        clf = [svm.SVC() for i in range(clusterNum)]
+        clf = [svm.SVC(C=100, kernel='poly', degree=3) for i in range(clusterNum)]
         for i in range(clusterNum):
             clf[i].fit(train[i], trainLabel[i])
         return (clf, test, testLabel, clusterNum) # return test and testLabel to self.test() so no need to
@@ -73,7 +73,7 @@ class svmNoCluster(svmStockPred):
         
     def train(self):
         train, test, trainLabel, testLabel = self.trainTestSplit()
-        clf = svm.SVC() 
+        clf = svm.SVC(C=100, kernel='poly', degree=3) 
         clf.fit(train, trainLabel)
         return (clf, test, testLabel) # return test and testLabel to self.test() so no need to
 

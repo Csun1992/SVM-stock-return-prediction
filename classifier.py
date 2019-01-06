@@ -25,7 +25,7 @@ class Classifier(object):
         minSize = min(Counter(groupNum).values()) # find the smallest sample size among all groups
         nComponents = min(max(minSize / 30, 1), np.size(data, 1)) # each feature needs 30 samples
         labels = data[:, -1]
-        data = pca(n_components = nComponents, kernel = 'linear').fit_transform(data[:, :-1])
+        data = pca(n_components = nComponents, kernel = 'rbf').fit_transform(data[:, :-1])
         group, label = [], []
         for i in range(clusterNum):
             group.append(data[groupNum==i])
@@ -42,7 +42,6 @@ class Classifier(object):
             test.append(testData)
             trainLabel.append(trainLabelData)
             testLabel.append(testLabelData)
-#print testLabel    
         return (train, test, trainLabel, testLabel)
             
     def train(self):
@@ -56,10 +55,6 @@ class Classifier(object):
             pred = clf[i].predict(test[i]) 
             individualF1 = f1_score(testLabel[i], pred)
             f1.append(individualF1)
-
-#f1.append(f1_score(testLabel[i], pred, average = 'micro'))
-#caseError = sum([i != j for (i,j) in zip(testLabel[i], pred)])
-#error.append(float(caseError)/len(pred))
         return (f1, clusterNum)
 
     def reportResult(self):

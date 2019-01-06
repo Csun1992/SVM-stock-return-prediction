@@ -5,7 +5,6 @@ Without Clustering, the f1 score is
 0.739393939394
 
 
-4
 For the case when cluster = 4 :
 group NO.1 f1 score is
 0.74
@@ -22,7 +21,6 @@ Without Clustering, the f1 score is
 0.691823899371
 
 
-1
 For the case when cluster = 1 :
 group NO.1 f1 score is
 0.74
@@ -33,7 +31,6 @@ Without Clustering, the f1 score is
 0.746987951807
 
 
-2
 For the case when cluster = 2 :
 group NO.1 f1 score is
 0.71
@@ -46,7 +43,6 @@ Without Clustering, the f1 score is
 0.640522875817
 
 
-1
 For the case when cluster = 1 :
 group NO.1 f1 score is
 0.0
@@ -57,7 +53,6 @@ Without Clustering, the f1 score is
 0.622516556291
 
 
-1
 For the case when cluster = 1 :
 group NO.1 f1 score is
 0.63
@@ -68,7 +63,6 @@ Without Clustering, the f1 score is
 0.731707317073
 
 
-2
 For the case when cluster = 2 :
 group NO.1 f1 score is
 0.74
@@ -81,7 +75,6 @@ Without Clustering, the f1 score is
 0.723926380368
 
 
-2
 For the case when cluster = 2 :
 group NO.1 f1 score is
 0.78
@@ -94,7 +87,6 @@ Without Clustering, the f1 score is
 0.804597701149
 
 
-2
 For the case when cluster = 2 :
 group NO.1 f1 score is
 0.74
@@ -107,14 +99,9 @@ Without Clustering, the f1 score is
 0.716049382716
 
 
-3
-For the case when cluster = 3 :
+For the case when cluster = 1 :
 group NO.1 f1 score is
 0.74
-group NO.2 f1 score is
-0.0
-group NO.3 f1 score is
-0.71
 
 
 The stock we are considering now is homeDepot
@@ -122,7 +109,6 @@ Without Clustering, the f1 score is
 0.708074534161
 
 
-2
 For the case when cluster = 2 :
 group NO.1 f1 score is
 0.78
@@ -135,7 +121,6 @@ Without Clustering, the f1 score is
 0.754491017964
 
 
-2
 For the case when cluster = 2 :
 group NO.1 f1 score is
 0.74
@@ -148,7 +133,6 @@ Without Clustering, the f1 score is
 0.691823899371
 
 
-1
 For the case when cluster = 1 :
 group NO.1 f1 score is
 0.84
@@ -159,7 +143,6 @@ Without Clustering, the f1 score is
 0.761904761905
 
 
-2
 For the case when cluster = 2 :
 group NO.1 f1 score is
 0.63
@@ -172,7 +155,6 @@ Without Clustering, the f1 score is
 0.691823899371
 
 
-1
 For the case when cluster = 1 :
 group NO.1 f1 score is
 0.78
@@ -183,7 +165,6 @@ Without Clustering, the f1 score is
 0.7
 
 
-3
 For the case when cluster = 3 :
 group NO.1 f1 score is
 0.63
@@ -198,7 +179,6 @@ Without Clustering, the f1 score is
 0.769230769231
 
 
-2
 For the case when cluster = 2 :
 group NO.1 f1 score is
 0.58
@@ -211,7 +191,6 @@ Without Clustering, the f1 score is
 0.723926380368
 
 
-2
 For the case when cluster = 2 :
 group NO.1 f1 score is
 0.78
@@ -221,10 +200,9 @@ group NO.2 f1 score is
 
 The stock we are considering now is toyota
 Without Clustering, the f1 score is
-0.708074534161
+0.569230769231
 
 
-1
 For the case when cluster = 1 :
 group NO.1 f1 score is
 0.63
@@ -235,7 +213,6 @@ Without Clustering, the f1 score is
 0.683544303797
 
 
-1
 For the case when cluster = 1 :
 group NO.1 f1 score is
 0.78
@@ -246,7 +223,6 @@ Without Clustering, the f1 score is
 0.708074534161
 
 
-1
 For the case when cluster = 1 :
 group NO.1 f1 score is
 0.71
@@ -257,7 +233,6 @@ Without Clustering, the f1 score is
 0.739393939394
 
 
-2
 For the case when cluster = 2 :
 group NO.1 f1 score is
 0.58
@@ -270,7 +245,6 @@ Without Clustering, the f1 score is
 0.683544303797
 
 
-2
 For the case when cluster = 2 :
 group NO.1 f1 score is
 0.63
@@ -283,7 +257,6 @@ Without Clustering, the f1 score is
 0.7
 
 
-1
 For the case when cluster = 1 :
 group NO.1 f1 score is
 0.78
@@ -294,7 +267,6 @@ Without Clustering, the f1 score is
 0.683544303797
 
 
-4
 For the case when cluster = 4 :
 group NO.1 f1 score is
 0.63
@@ -308,10 +280,9 @@ group NO.4 f1 score is
 
 The stock we are considering now is nissan
 Without Clustering, the f1 score is
-0.716049382716
+0.566037735849
 
 
-2
 For the case when cluster = 2 :
 group NO.1 f1 score is
 0.74
@@ -324,7 +295,6 @@ Without Clustering, the f1 score is
 0.631578947368
 
 
-1
 For the case when cluster = 1 :
 group NO.1 f1 score is
 0.74
@@ -335,7 +305,6 @@ Without Clustering, the f1 score is
 0.746987951807
 
 
-2
 For the case when cluster = 2 :
 group NO.1 f1 score is
 0.78
@@ -348,7 +317,6 @@ Without Clustering, the f1 score is
 0.683544303797
 
 
-1
 For the case when cluster = 1 :
 group NO.1 f1 score is
 0.74
@@ -359,7 +327,6 @@ Without Clustering, the f1 score is
 0.631578947368
 
 
-1
 For the case when cluster = 1 :
 group NO.1 f1 score is
 0.53
@@ -370,7 +337,6 @@ Without Clustering, the f1 score is
 0.7
 
 
-2
 For the case when cluster = 2 :
 group NO.1 f1 score is
 0.84
@@ -383,7 +349,6 @@ Without Clustering, the f1 score is
 0.7
 
 
-4
 For the case when cluster = 4 :
 group NO.1 f1 score is
 0.58
