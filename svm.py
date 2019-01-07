@@ -27,7 +27,7 @@ class svmStockPred(Classifier):
 
     def train(self):
         cvForDiffClusters = []
-        for clusterNum in range(1, 5):
+        for clusterNum in range(3, 5):
             train, test, trainLabel, testLabel = self.trainTestSplit(clusterNum)
             clf = svm.SVC(C=1000, kernel='rbf') 
             yScores = model_selection.cross_val_predict(clf, train[0], trainLabel[0], cv=3,
