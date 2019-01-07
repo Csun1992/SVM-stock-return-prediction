@@ -29,16 +29,22 @@ class svmStockPred(Classifier):
         cvForDiffClusters = []
         for clusterNum in range(1, 5):
             train, test, trainLabel, testLabel = self.trainTestSplit(clusterNum)
-            clf = svm.SVC(C=1, kernel='rbf') 
+            clf = svm.SVC(C=1000, kernel='rbf') 
+            print sum(trainLabel[0])/float(len(trainLabel[0]))
             yScores = model_selection.cross_val_predict(clf, train[0], trainLabel[0], cv=3,
                     method='decision_function')
             precision, recall, thresholds = precision_recall_curve(trainLabel[0], yScores)
-            print precision
-            print recall
-            print thresholds
+#  print precision
+#            print recall
+#            print thresholds
             plotPrecisionRecall(precision, recall, thresholds)
             plt.show()
-            exit()
+            plt.plot(precision[:-1], recall[:-1], 'b--', label='precision_vs_recall')
+            plt.xlabel("precision")
+            plt.ylabel("recall")
+            plt.show()
+        exit()
+    """
             cvScore = []
             clf = svm.SVC(C=1, kernel='rbf') 
             for i in range(clusterNum):
@@ -52,7 +58,7 @@ class svmStockPred(Classifier):
         for i in range(clusterNum):
             clf[i].fit(train[i], trainLabel[i])
         return (clf, test, testLabel, clusterNum) # return test and testLabel to self.test() so no need to
-                                      # recompute the testing data again
+    """                                 # recompute the testing data again
 
 
 # StockPredNoClassification class is a class to classify the stock price direction 
