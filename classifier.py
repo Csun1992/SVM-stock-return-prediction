@@ -1,4 +1,5 @@
 import numpy as np
+from sys import exit
 from collections import Counter
 from sklearn import preprocessing, cluster, model_selection, svm
 from sklearn.decomposition import KernelPCA as pca
@@ -12,15 +13,16 @@ class Classifier(object):
         self.microDataLoc = microDataLoc
         self.macroDataLoc = macroDataLoc
 
-    def cluster(self, clusterNum):
-        data = np.loadtxt(self.macroDataLoc)
+    # load and cluster the dataset into number of groups equal clusterNum 
+    def cluster(self, clusterNum): 
+        data = np.loadtxt(self.macroDataLoc) # data for clustering with k-mean
         cleanData = preprocessing.scale(data)
         kmeans = cluster.KMeans(n_clusters=clusterNum, random_state=11).fit(cleanData)
         groupNum = np.array(kmeans.labels_)
         return groupNum
 
     def prepareData(self, clusterNum):
-        data = np.loadtxt(self.microDataLoc)
+        data = np.loadtxt(self.microDataLoc) # data for classification with specified classifier
         groupNum = self.cluster(clusterNum)
         minSize = min(Counter(groupNum).values()) # find the smallest sample size among all groups
         nComponents = min(max(minSize / 30, 1), np.size(data, 1)) # each feature needs 30 samples
