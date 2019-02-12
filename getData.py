@@ -19,8 +19,8 @@ def getInputData(fileName):
     del threeMonthMA[-1]
     twoMonthMA = [(i+j)/2 for i,j in zip(price[1: ], price[2: ])]
     del twoMonthMA[-1]
-    stockReturn = [(j-i)/i for i,j in zip(price[1: ], price[2: ])]
-    del stockReturn[-1]
+    stockReturn = [(j-i)/i for i,j in zip(price[2: ], price[3: ])]
+#    del stockReturn[-1]
     classification = np.array(map(int, [i > 0.005 for i in stockReturn])).reshape(-1, 1)
     inputData = np.array([price[2:-1], twoMonthMA, threeMonthMA]).T
 #   inputData = preprocessing.scale(inputData)

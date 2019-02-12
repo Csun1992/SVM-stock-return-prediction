@@ -23,7 +23,7 @@ def plotPrecisionRecall(precision, recall, thresholds):
 # Object that for svm with clustering 
 class svmStockPred(Classifier):
     def __init__(self, microDataLoc, clusterNum = 3, macroDataLoc="data/clusterData.txt"):
-        Classifier.__init__(self, microDataLoc, clusterNum, macroDataLoc="data/clusterData.txt")
+        Classifier.__init__(self, microDataLoc, clusterNum, macroDataLoc)
 
     def train(self):
 #        cvForDiffClusters = []
