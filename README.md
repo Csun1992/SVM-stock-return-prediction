@@ -8,7 +8,7 @@ In this repository we predict stock price moving direction with K-means clusteri
 - sckit-learn
 
 # Detailed Description of the Machine Learning Algorithm
-In this project, we predict the direction of stock price movement in the future months. So essentially, it is a classification problem.
+In this project, we predict whether stock return will be over 2% in the future. So essentially, it is a classification problem.
 
 First, we cluster time periods into three clusters. The reason is because business cycles consist of 4 phases: 
 recovery, prosperity, recession and depression. The reason we use three clusters instead of four is due to the 
